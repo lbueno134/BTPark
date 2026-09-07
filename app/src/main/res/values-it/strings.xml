@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Parcheggio</string>
+    <string name="channel_name">Parcheggio</string>
+    <string name="channel_description">Rileva la disconnessione Bluetooth dell\'auto.</string>
+    <string name="ver_ltimo_aparcamiento">Visualizza l\'ultima posizione di parcheggio</string>
+    <string name="bluetooth_del_m_vil_est_apagado">○ Il Bluetooth del telefono è disattivato</string>
+    <string name="este_m_vil_no_tiene_bluetooth">○ Questo telefono non dispone del Bluetooth</string>
+    <string name="dispositivo_bluetooth">Dispositivo Bluetooth</string>
+    <string name="no_hay_dispositivos_emparejados">Nessun dispositivo associato</string>
+    <string name="no_hay_ning_n_dispositivo_bluetooth_emparejado">Nessun dispositivo Bluetooth associato.</string>
+    <string name="coche">Auto</string>
+    <string name="necesitas_conceder_permiso_de_ubicaci_n_precisa">È necessario concedere l\'autorizzazione per la posizione precisa.</string>
+    <string name="aparcamiento">Parcheggio</string>
+    <string name="bluetooth_del_coche">Bluetooth dell\'auto</string>
+    <string name="concede_tambi_n_permitir_todo_el_tiempo_para_que">Concedi anche «Consenti sempre» affinché </string>
+    <string name="pueda_registrar_el_aparcamiento_con_la_pantalla_cerrada">la posizione di parcheggio possa essere registrata quando lo schermo è spento.</string>
+    <string name="seguimiento_activado">Monitoraggio attivato.</string>
+    <string name="bluetooth_del_coche_no_configurado">○ Bluetooth dell\'auto non configurato</string>
+    <string name="ltimo_aparcamiento_no_hay_ninguno_registrado">Ultima posizione di parcheggio\nNessuna posizione registrata</string>
+    <string name="guardar_configuraci_n">Salva impostazioni</string>
+    <string name="esperando_desconexi_n_del_coche">● In attesa della disconnessione dell\'auto</string>
+    <string name="actualizar_configuraci_n">Aggiorna impostazioni</string>
+    <string name="ltimo_aparcamiento">Ultima posizione di parcheggio\n</string>
+    <string name="precisi_n">" · Precisione "</string>
+    <string name="todav_a_no_hay_ning_n_aparcamiento_registrado">Non è stata ancora registrata alcuna posizione di parcheggio.</string>
+    <string name="no_hay_una_aplicaci_n_de_mapas_disponible">Nessuna applicazione di mappe disponibile.</string>
+    <string name="desactivar">**Disattiva**</string>
+    <string name="esperando_al_conexi_n_del_coche">○ In attesa della connessione dell\'auto</string>
+    <string name="donde_he_aparcado">Dove ho parcheggiato?</string>
+    <string name="coche_aparcado">"Auto parcheggiata: "</string>
+    <string name="pulsa_para_ver_la_posici_n_en_google_maps">Tocca per visualizzare la posizione in Google Maps</string>
+    <string name="posici_n_de_aparcamiento_a_las">"Posizione di parcheggio alle "</string>
+    <string name="he_aparcado_el_coche_en_esta_posici_n">Ho parcheggiato l\'auto in questa posizione:\n\n</string>
+    <string name="latitud">"Latitudine: "</string>
+    <string name="longitud">"Longitudine: "</string>
+    <string name="abrir_posici_n_en_google_maps">Apri la posizione di parcheggio in Google Maps:\n</string>
+    <string name="manual_text">1. Seleziona il dispositivo Bluetooth della tua auto.\n\n2. Concedi all\'app le autorizzazioni richieste.\n\n3. È molto importante consentire l\'accesso alla posizione selezionando l\'opzione «Consenti sempre».\n\n4. Una volta configurata, l\'app rimarrà in attesa della disconnessione del Bluetooth dell\'auto.\n\n5. Quando il Bluetooth si disconnette, l\'app salverà la posizione attuale come luogo in cui hai parcheggiato l\'auto.\n\n6. Potrai quindi toccare la posizione salvata o la notifica per aprire la mappa e vedere dove si trova l\'auto.</string>
+    <string name="instrucciones">Istruzioni</string>
+</resources>

@@ -1,0 +1,21 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'net.leobueno.aparcamientobluetooth'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'net.leobueno.aparcamientobluetooth'
+        minSdk 26
+        targetSdk 36
+        versionCode 1
+        versionName '1.0'
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core:1.17.0'
+    implementation 'com.google.android.gms:play-services-location:21.3.0'
+}

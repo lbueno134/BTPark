@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Estacionamento</string>
+    <string name="channel_name">Estacionamento</string>
+    <string name="channel_description">Deteta a desconexão Bluetooth do carro.</string>
+    <string name="ver_ltimo_aparcamiento">Ver o último local de estacionamento</string>
+    <string name="bluetooth_del_m_vil_est_apagado">○ O Bluetooth do telemóvel está desligado</string>
+    <string name="este_m_vil_no_tiene_bluetooth">○ Este telemóvel não tem Bluetooth</string>
+    <string name="dispositivo_bluetooth">Dispositivo Bluetooth</string>
+    <string name="no_hay_dispositivos_emparejados">Não existem dispositivos emparelhados</string>
+    <string name="no_hay_ning_n_dispositivo_bluetooth_emparejado">Não existe nenhum dispositivo Bluetooth emparelhado.</string>
+    <string name="coche">Carro</string>
+    <string name="necesitas_conceder_permiso_de_ubicaci_n_precisa">É necessário conceder permissão para aceder à localização precisa.</string>
+    <string name="aparcamiento">Estacionamento</string>
+    <string name="bluetooth_del_coche">Bluetooth do carro</string>
+    <string name="concede_tambi_n_permitir_todo_el_tiempo_para_que">Conceda também «Permitir sempre» para que </string>
+    <string name="pueda_registrar_el_aparcamiento_con_la_pantalla_cerrada">o local de estacionamento possa ser registado com o ecrã desligado.</string>
+    <string name="seguimiento_activado">Monitorização ativada.</string>
+    <string name="bluetooth_del_coche_no_configurado">○ Bluetooth do carro não configurado</string>
+    <string name="ltimo_aparcamiento_no_hay_ninguno_registrado">Último local de estacionamento\nNenhum registado</string>
+    <string name="guardar_configuraci_n">Guardar configuração</string>
+    <string name="esperando_desconexi_n_del_coche">● A aguardar a desconexão do carro</string>
+    <string name="actualizar_configuraci_n">Atualizar configuração</string>
+    <string name="ltimo_aparcamiento">Último local de estacionamento\n</string>
+    <string name="precisi_n">" · Precisão "</string>
+    <string name="todav_a_no_hay_ning_n_aparcamiento_registrado">Ainda não foi registado nenhum local de estacionamento.</string>
+    <string name="no_hay_una_aplicaci_n_de_mapas_disponible">Não está disponível nenhuma aplicação de mapas.</string>
+    <string name="desactivar">**Desativar**</string>
+    <string name="esperando_al_conexi_n_del_coche">○ A aguardar a ligação do carro</string>
+    <string name="donde_he_aparcado">Onde estacionei?</string>
+    <string name="coche_aparcado">"Carro estacionado: "</string>
+    <string name="pulsa_para_ver_la_posici_n_en_google_maps">Toque para ver a localização no Google Maps</string>
+    <string name="posici_n_de_aparcamiento_a_las">"Local de estacionamento às "</string>
+    <string name="he_aparcado_el_coche_en_esta_posici_n">Estacionei o carro neste local:\n\n</string>
+    <string name="latitud">"Latitude: "</string>
+    <string name="longitud">"Longitude: "</string>
+    <string name="abrir_posici_n_en_google_maps">Abrir o local de estacionamento no Google Maps:\n</string>
+    <string name="manual_text">1. Selecione o dispositivo Bluetooth do seu carro.\n\n2. Conceda à aplicação as permissões solicitadas.\n\n3. É muito importante permitir o acesso à localização selecionando a opção «Permitir sempre».\n\n4. Depois de configurada, a aplicação ficará a aguardar a desconexão do Bluetooth do carro.\n\n5. Quando o Bluetooth se desligar, a aplicação guardará a localização atual como o local onde estacionou o carro.\n\n6. Depois poderá tocar na localização guardada ou na notificação para abrir o mapa e ver onde está o carro.</string>
+    <string name="instrucciones">Instruções</string>
+</resources>
