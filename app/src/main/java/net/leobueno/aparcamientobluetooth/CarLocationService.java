@@ -89,18 +89,6 @@ public class CarLocationService extends Service {
 
         startActivity(Intent.createChooser(intent, "Enviar posición"));
     }
-    private void updateNotification(Location location) {
-        Notification notification = createNotification(location);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            startForeground(
-                    NOTIFICATION_ID,
-                    notification,
-                    android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
-        } else {
-            startForeground(NOTIFICATION_ID, notification);
-        }
-    }
     private void registerBluetoothReceiver() {
         bluetoothReceiver = new BroadcastReceiver() {
 
@@ -153,7 +141,11 @@ public class CarLocationService extends Service {
                 {
                     case BluetoothDevice.ACTION_ACL_CONNECTED:
                         setConnected(true);
-                        updateNotification(getLocation());
+                        Notification notification = createNotification(getLocation());
+                        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                        NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, notification);
                         break;
                     case BluetoothDevice.ACTION_ACL_DISCONNECTED:
                         setConnected(false);
@@ -165,7 +157,7 @@ public class CarLocationService extends Service {
 
         IntentFilter filter = new IntentFilter(
                 BluetoothDevice.ACTION_ACL_DISCONNECTED);
-//        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
         filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
         if (Build.VERSION.SDK_INT >= 33) {
             registerReceiver(
@@ -256,12 +248,10 @@ public class CarLocationService extends Service {
                     intent,
                     PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
             );
-
-            SimpleDateFormat formato =
-                    new SimpleDateFormat("d MMM HH:mm", Locale.getDefault());
-
-            String date = formato.format(ms);
-
+            String date = DateFormat.getDateTimeInstance(
+                    DateFormat.SHORT,
+                    DateFormat.SHORT,
+                    Locale.getDefault()).format(new Date(ms));
             return new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_car)
                     .setContentTitle(prefix + getString(R.string.coche_aparcado) + date)
@@ -269,8 +259,7 @@ public class CarLocationService extends Service {
                     .setContentIntent(pendingIntent)
                     .setColor(color)
                     .setAutoCancel(false)
-                    .setCategory(NotificationCompat.CATEGORY_SERVICE)
-                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                    .setCategory(Notification.CATEGORY_SERVICE)
                     .setOngoing(true)
                     .build();
         }
@@ -290,9 +279,10 @@ public class CarLocationService extends Service {
                     .setContentText(getString(R.string.donde_he_aparcado))
                     .setOngoing(true)
                     .setAutoCancel(false)
+                    .setCategory(Notification.CATEGORY_SERVICE)
                     .setColor(color)
-                    .setCategory(NotificationCompat.CATEGORY_SERVICE)
-                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                    .setPriority(
+                            NotificationCompat.PRIORITY_LOW)
                     .setContentIntent(pendingIntent)
                     .build();
         }
@@ -323,7 +313,7 @@ public class CarLocationService extends Service {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        updateNotification(location);
+        NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, notification);
     }
 
     private void createNotificationChannel() {
