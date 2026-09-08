@@ -34,11 +34,9 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
+import net.leobueno.aparcamientobluetooth.Tools;
 
 public class CarLocationService extends Service {
 
@@ -66,10 +64,7 @@ public class CarLocationService extends Service {
 
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-        SimpleDateFormat formato =
-                new SimpleDateFormat("d MMM HH:mm", Locale.getDefault());
-
-        String date = formato.format(location.getTime());
+        String date = Tools.getDate(location.getTime());
 
         String mapsUrl = "https://www.google.com/maps/search/?api=1&query="
                 + latitude + "," + longitude;
@@ -141,7 +136,7 @@ public class CarLocationService extends Service {
                 {
                     case BluetoothDevice.ACTION_ACL_CONNECTED:
                         setConnected(true);
-                        Notification notification = createNotification(getLocation());
+                        Notification notification = createNotification(Tools.getLocation(context));
                         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                             return;
                         }
@@ -248,10 +243,7 @@ public class CarLocationService extends Service {
                     intent,
                     PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
             );
-            String date = DateFormat.getDateTimeInstance(
-                    DateFormat.SHORT,
-                    DateFormat.SHORT,
-                    Locale.getDefault()).format(new Date(ms));
+            String date = Tools.getDate(loc.getTime());
             return new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_car)
                     .setContentTitle(prefix + getString(R.string.coche_aparcado) + date)
@@ -287,15 +279,6 @@ public class CarLocationService extends Service {
                     .build();
         }
     }
-    public Location getLocation() {
-        Location loc = new Location("gps");
-        SharedPreferences prefs = getPrefs();
-        loc.setLatitude(Double.parseDouble(prefs.getString("pos_latitude", "0")));
-        loc.setLongitude(Double.parseDouble(prefs.getString("pos_longitude", "0")));
-        loc.setAccuracy(prefs.getFloat("pos_accuracy", 0));
-        loc.setTime(prefs.getLong("pos_ms", 0));
-        return loc.getTime() != 0 ? loc : null;
-    }
     private void saveLocation(Location location) {
         SharedPreferences prefs = getPrefs();
         double lat = location.getLatitude();
@@ -314,8 +297,17 @@ public class CarLocationService extends Service {
             return;
         }
         NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, notification);
+        notifyParkingUpdated(); //Enviar la notificación para actualizar la pantalla.
     }
+    private void notifyParkingUpdated() {
 
+        Intent intent = new Intent("net.leobueno.aparcamientobluetooth.PARKING_UPDATED");
+
+        // Solo para que el broadcast quede dentro de nuestra aplicación
+        intent.setPackage(getPackageName());
+
+        sendBroadcast(intent);
+    }
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= 26) {
 
@@ -343,7 +335,7 @@ public class CarLocationService extends Service {
             int flags,
             int startId) {
 
-        Notification notification = createNotification(getLocation());
+        Notification notification = createNotification(Tools.getLocation(this));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             startForeground(
                     NOTIFICATION_ID,

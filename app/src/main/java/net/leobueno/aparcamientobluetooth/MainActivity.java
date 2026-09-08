@@ -5,7 +5,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -20,7 +24,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,10 +33,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -49,20 +49,30 @@ public class MainActivity extends Activity {
 
     private Spinner bluetoothSpinner;
     private TextView statusText;
-    private EditText emailText;
     private TextView lastParkingText;
-    private Button saveButton;
 
-    private List<BluetoothDevice> devices = new ArrayList<>();
+    private final List<BluetoothDevice> devices = new ArrayList<>();
     private final Handler handler = new Handler(Looper.getMainLooper());
     private long lastRefresh = 0;
     private boolean lastConnection = true;
 
+    private final BroadcastReceiver parkingReceiver =
+            new BroadcastReceiver() {
+
+                @Override
+                public void onReceive(Context context, Intent intent) {
+
+                    if ("net.leobueno.aparcamientobluetooth.PARKING_UPDATED"
+                            .equals(intent.getAction())) {
+                        updateScreen();
+                    }
+                }
+            };
     private final Runnable refresh = new Runnable() {
         @Override
         public void run() {
 
-            Location loc = getLocation();
+            Location loc = Tools.getLocation(getBaseContext());
             long newRefresh = loc != null ? loc.getTime() : 0;
             boolean newConnection = isConnected();
             if (newRefresh != lastRefresh || newConnection != lastConnection)
@@ -86,7 +96,34 @@ public class MainActivity extends Activity {
         if (open != null && open.equals("last"))
             openLastParking();
     }
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        IntentFilter filter = new IntentFilter(
+                "net.leobueno.aparcamientobluetooth.PARKING_UPDATED"
+        );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(
+                    parkingReceiver,
+                    filter,
+                    Context.RECEIVER_NOT_EXPORTED
+            );
+        } else {
+            registerReceiver(
+                    parkingReceiver,
+                    filter
+            );
+        }
+        updateScreen();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        unregisterReceiver(parkingReceiver);
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -132,8 +169,6 @@ public class MainActivity extends Activity {
                     View view,
                     int position,
                     long id) {
-
-                Object item = parent.getItemAtPosition(position);
 
                 // Ha cambiado el elemento seleccionado
                 saveConfiguration();
@@ -213,6 +248,7 @@ public class MainActivity extends Activity {
         }
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean hasPermission(String permission) {
         return ContextCompat.checkSelfPermission(this, permission)
                 == PackageManager.PERMISSION_GRANTED;
@@ -224,7 +260,11 @@ public class MainActivity extends Activity {
             return;
         }
 
-        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        BluetoothManager bluetoothManager =
+                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+
+        BluetoothAdapter adapter = bluetoothManager.getAdapter();
+        //BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 
         if (adapter == null) {
             statusText.setText(R.string.este_m_vil_no_tiene_bluetooth);
@@ -240,6 +280,9 @@ public class MainActivity extends Activity {
         List<String> names = new ArrayList<>();
         devices.add(null);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         Set<BluetoothDevice> bonded = adapter.getBondedDevices();
 
         for (BluetoothDevice device : bonded) {
@@ -374,9 +417,9 @@ public class MainActivity extends Activity {
                 Toast.LENGTH_SHORT).show();
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateScreen() {
         String address = getPrefs().getString(KEY_ADDRESS, null);
-        String name = getPrefs().getString(KEY_NAME, null);
 
         if (address == null) {
             statusText.setText(R.string.bluetooth_del_coche_no_configurado);
@@ -388,16 +431,13 @@ public class MainActivity extends Activity {
         else
             statusText.setText(R.string.esperando_al_conexi_n_del_coche);
 
-        Location loc = getLocation();
+        Location loc = Tools.getLocation(getBaseContext());
 
         if (loc == null) {
             lastParkingText.setText(
                     R.string.ltimo_aparcamiento_no_hay_ninguno_registrado);
         } else {
-            SimpleDateFormat formato =
-                    new SimpleDateFormat("d MMM HH:mm", Locale.getDefault());
-
-            String date = formato.format(loc.getTime());
+            String date = Tools.getDate(loc.getTime());
 
             lastParkingText.setText(
                     getString(R.string.ltimo_aparcamiento) +
@@ -410,17 +450,8 @@ public class MainActivity extends Activity {
     {
         return getPrefs().getBoolean("bt_connected", false);
     }
-    public Location getLocation() {
-        Location loc = new Location("gps");
-        SharedPreferences prefs = getPrefs();
-        loc.setLatitude(Double.parseDouble(prefs.getString("pos_latitude", "0")));
-        loc.setLongitude(Double.parseDouble(prefs.getString("pos_longitude", "0")));
-        loc.setAccuracy(prefs.getFloat("pos_accuracy", 0));
-        loc.setTime(prefs.getLong("pos_ms", 0));
-        return loc.getTime() != 0 ? loc : null;
-    }
     private void openLastParking() {
-        Location loc = getLocation();
+        Location loc = Tools.getLocation(getBaseContext());
         if (loc == null) {
             Toast.makeText(this,
                     R.string.todav_a_no_hay_ning_n_aparcamiento_registrado,
