@@ -244,7 +244,7 @@ public class CarLocationService extends Service {
             );
             String date = Tools.getDate(loc.getTime());
             return new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_car)
+                    .setSmallIcon(isconnected ? R.drawable.ic_volante : R.drawable.ic_car)
                     .setContentTitle(prefix + getString(R.string.coche_aparcado) + date)
                     .setContentText(getString(R.string.pulsa_para_ver_la_posici_n_en_google_maps))
                     .setContentIntent(pendingIntent)
@@ -265,7 +265,7 @@ public class CarLocationService extends Service {
                             (Build.VERSION.SDK_INT >= 23 ? PendingIntent.FLAG_IMMUTABLE : 0));
 
             return new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_car)
+                    .setSmallIcon(isconnected ? R.drawable.ic_volante : R.drawable.ic_car)
                     .setContentTitle(prefix + getString(R.string.aparcamiento))
                     .setContentText(getString(R.string.donde_he_aparcado))
                     .setOngoing(true)
