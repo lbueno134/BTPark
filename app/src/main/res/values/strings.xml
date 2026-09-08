@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Aparcamiento</string>
+    <string name="app_name">Leo\'s BTPark</string>
     <string name="channel_name">Parking</string>
     <string name="channel_description">Detects the car\'s Bluetooth disconnection.</string>
     <string name="ver_ltimo_aparcamiento">View last parking location</string>
@@ -11,7 +11,7 @@
     <string name="no_hay_ning_n_dispositivo_bluetooth_emparejado">No Bluetooth devices are paired.</string>
     <string name="coche">Car</string>
     <string name="necesitas_conceder_permiso_de_ubicaci_n_precisa">You need to grant precise location permission.</string>
-    <string name="aparcamiento">Parking</string>
+    <string name="aparcamiento">Leo\'s BTPark</string>
     <string name="bluetooth_del_coche">Car Bluetooth</string>
     <string name="concede_tambi_n_permitir_todo_el_tiempo_para_que">Also grant "Allow all the time" so that </string>
     <string name="pueda_registrar_el_aparcamiento_con_la_pantalla_cerrada">the parking location can be recorded while the screen is off.</string>

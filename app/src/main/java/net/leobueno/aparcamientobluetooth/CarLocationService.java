@@ -228,7 +228,7 @@ public class CarLocationService extends Service {
     public Notification createNotification(Location loc) {
         boolean isconnected = getPrefs().getBoolean("bt_connected", false);
         String prefix = isconnected ? "⚡" : "";
-        int color = isconnected ? Color.BLUE : Color.TRANSPARENT;
+        int color = isconnected ? ContextCompat.getColor(this, R.color.bluetooth_blue) : Color.TRANSPARENT;
         if (loc != null) {
             double lat = loc.getLatitude();
             double lon = loc.getLongitude();

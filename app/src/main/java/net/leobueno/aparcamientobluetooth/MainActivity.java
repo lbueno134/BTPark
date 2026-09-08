@@ -95,7 +95,6 @@ public class MainActivity extends Activity {
         String open = intent.getStringExtra("openGeo");
         if (open != null && open.equals("last"))
             openLastParking();
-        queryBackgroundPermission();
     }
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     @Override
@@ -238,6 +237,7 @@ public class MainActivity extends Activity {
             permissions.add(Manifest.permission.POST_NOTIFICATIONS);
         }
 
+        queryBackgroundPermission();
         if (!permissions.isEmpty()) {
             ActivityCompat.requestPermissions(
                     this,
