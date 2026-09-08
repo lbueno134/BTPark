@@ -24,6 +24,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -203,6 +205,24 @@ public class MainActivity extends Activity {
         manual.setTextSize(12);
         manual.setText(R.string.manual_text);
         root.addView(manual, matchWrap());
+
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        TextView label = new TextView(this);
+        label.setText(R.string.hacer_la_notificaci_n_persistente);
+        row.addView(label);
+        CheckBox check = new CheckBox(this);
+        check.setGravity(Gravity.RIGHT);
+        boolean recreate = getPrefs().getBoolean("nt_always_on", true);
+        check.setChecked(recreate);
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isCheckedNow) {
+                getPrefs().edit().putBoolean("nt_always_on", isCheckedNow).apply();
+            }
+        });        row.addView(check);
+        root.addView(row, matchWrap());
+
         setContentView(root);
     }
 

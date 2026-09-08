@@ -42,4 +42,5 @@
     <string name="ubicacion_segundo_plano_explicacion">To automatically save where you parked when you close the screen or leave the app, Leo\'s BTPark needs to access your location in the background.</string>
     <string name="ubicacion_segundo_plano_pasos">On the next screen:\n1. Tap "Permissions".\n2. Select "Location".\n3. Select "Allow all the time".\n\nThen return to Leo\'s BTPark.</string>
     <string name="abrir_ajustes">Open settings</string>
+    <string name="hacer_la_notificaci_n_persistente">Persistent notification</string>
 </resources>

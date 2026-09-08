@@ -48,11 +48,48 @@ public class CarLocationService extends Service {
     private BroadcastReceiver bluetoothReceiver;
     private final AtomicBoolean gettingLocation = new AtomicBoolean(false);
 
+    private final BroadcastReceiver notificationDeletedReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    boolean recreate = getPrefs().getBoolean("nt_always_on", true);
+                    if (recreate && NOTIFICATION_ID == intent.getIntExtra(
+                            "notification_id", -1)) {
+
+                        Notification notification =
+                                createNotification(Tools.getLocation(context));
+
+                        if (Build.VERSION.SDK_INT < 33 ||
+                                ActivityCompat.checkSelfPermission(
+                                        context,
+                                        Manifest.permission.POST_NOTIFICATIONS)
+                                        == PackageManager.PERMISSION_GRANTED) {
+
+                            NotificationManagerCompat
+                                    .from(context)
+                                    .notify(NOTIFICATION_ID, notification);
+                        }
+                    }
+                }
+            };
     @Override
     public void onCreate() {
         super.onCreate();
 
         createNotificationChannel();
+        IntentFilter filter =
+                new IntentFilter("net.leobueno.aparcamientobluetooth.NOTIFICATION_DELETED");
+
+        if (Build.VERSION.SDK_INT >= 33) {
+            registerReceiver(
+                    notificationDeletedReceiver,
+                    filter,
+                    Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            registerReceiver(
+                    notificationDeletedReceiver,
+                    filter);
+        }
     }
     private void enviarCorreo(String mail, Location location) {
 
@@ -229,6 +266,23 @@ public class CarLocationService extends Service {
         boolean isconnected = getPrefs().getBoolean("bt_connected", false);
         String prefix = isconnected ? "⚡" : "";
         int color = isconnected ? ContextCompat.getColor(this, R.color.bluetooth_blue) : Color.TRANSPARENT;
+        Intent deleteIntent = new Intent(
+                "net.leobueno.aparcamientobluetooth.NOTIFICATION_DELETED");
+
+        deleteIntent.setPackage(getPackageName());
+
+        deleteIntent.putExtra(
+                "notification_id",
+                NOTIFICATION_ID);
+
+        PendingIntent deletePendingIntent =
+                PendingIntent.getBroadcast(
+                        this,
+                        NOTIFICATION_ID,
+                        deleteIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT |
+                                PendingIntent.FLAG_IMMUTABLE);
+
         if (loc != null) {
             double lat = loc.getLatitude();
             double lon = loc.getLongitude();
@@ -237,11 +291,11 @@ public class CarLocationService extends Service {
             intent.setPackage("com.google.android.apps.maps");
 
             PendingIntent pendingIntent = PendingIntent.getActivity(
-                    this,
-                    100,
-                    intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-            );
+                        this,
+                        100,
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                );
             String date = Tools.getDate(loc.getTime());
             return new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setSmallIcon(isconnected ? R.drawable.ic_volante : R.drawable.ic_car)
@@ -249,6 +303,7 @@ public class CarLocationService extends Service {
                     .setContentText(getString(R.string.pulsa_para_ver_la_posici_n_en_google_maps))
                     .setContentIntent(pendingIntent)
                     .setColor(color)
+                    .setDeleteIntent(deletePendingIntent)
                     .setAutoCancel(false)
                     .setCategory(Notification.CATEGORY_SERVICE)
                     .setOngoing(true)
@@ -272,6 +327,7 @@ public class CarLocationService extends Service {
                     .setAutoCancel(false)
                     .setCategory(Notification.CATEGORY_SERVICE)
                     .setColor(color)
+                    .setDeleteIntent(deletePendingIntent)
                     .setPriority(
                             NotificationCompat.PRIORITY_LOW)
                     .setContentIntent(pendingIntent)
@@ -365,7 +421,10 @@ public class CarLocationService extends Service {
             } catch (Exception ignored) {
             }
         }
-
+        try {
+            unregisterReceiver(notificationDeletedReceiver);
+        } catch (Exception ignored) {
+        }
         super.onDestroy();
     }
 
