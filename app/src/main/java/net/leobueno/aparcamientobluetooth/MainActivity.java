@@ -95,6 +95,7 @@ public class MainActivity extends Activity {
         String open = intent.getStringExtra("openGeo");
         if (open != null && open.equals("last"))
             openLastParking();
+        queryBackgroundPermission();
     }
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     @Override
@@ -376,19 +377,14 @@ public class MainActivity extends Activity {
                     Toast.LENGTH_LONG).show();
             return false;
         }
-
+        return queryBackgroundPermission();
+    }
+    private boolean queryBackgroundPermission()
+    {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q &&
-                !hasPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
-
-            Toast.makeText(this,
-                    getString(R.string.concede_tambi_n_permitir_todo_el_tiempo_para_que)
-                            + getString(R.string.pueda_registrar_el_aparcamiento_con_la_pantalla_cerrada),
-                    Toast.LENGTH_LONG).show();
-
-            Intent intent = new Intent(
-                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                    Uri.parse("package:" + getPackageName()));
-
+                !hasPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION))
+        {
+            Intent intent = new Intent(this, BackgroundLocationActivity.class);
             startActivityForResult(intent, REQUEST_BACKGROUND_LOCATION);
             return false;
         }

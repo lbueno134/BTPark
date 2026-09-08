@@ -36,4 +36,8 @@
     <string name="abrir_posici_n_en_google_maps">Parkplatz in Google Maps öffnen:\n</string>
     <string name="manual_text">1. Wählen Sie das Bluetooth-Gerät Ihres Autos aus.\n\n2. Erteilen Sie der App die angeforderten Berechtigungen.\n\n3. Es ist sehr wichtig, den Standortzugriff mit der Option „Immer zulassen“ zu erlauben.\n\n4. Nach der Konfiguration wartet die App auf die Trennung der Bluetooth-Verbindung des Autos.\n\n5. Wenn die Bluetooth-Verbindung getrennt wird, speichert die App den aktuellen Standort als den Ort, an dem Sie Ihr Auto geparkt haben.\n\n6. Anschließend können Sie auf den gespeicherten Standort oder auf die Benachrichtigung tippen, um die Karte zu öffnen und zu sehen, wo sich das Auto befindet.</string>
     <string name="instrucciones">Anleitung</string>
+    <string name="ubicacion_segundo_plano_titulo">Wir müssen den Zugriff auf den Standort im Hintergrund erlauben</string>
+    <string name="ubicacion_segundo_plano_explicacion">Damit automatisch gespeichert werden kann, wo Sie Ihr Auto geparkt haben, wenn Sie den Bildschirm schließen oder die App verlassen, benötigt Leo\'s BTPark Zugriff auf Ihren Standort im Hintergrund.</string>
+    <string name="ubicacion_segundo_plano_pasos">Auf dem nächsten Bildschirm:\n1. Tippen Sie auf "Berechtigungen".\n2. Wählen Sie "Standort".\n3. Wählen Sie "Immer zulassen".\n\nKehren Sie anschließend zu Leo\'s BTPark zurück.</string>
+    <string name="abrir_ajustes">Einstellungen öffnen</string>
 </resources>

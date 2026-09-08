@@ -34,9 +34,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 
-import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
-import net.leobueno.aparcamientobluetooth.Tools;
 
 public class CarLocationService extends Service {
 
@@ -132,21 +130,23 @@ public class CarLocationService extends Service {
                         device.getAddress())) {
                     return;
                 }
-                switch (intent.getAction())
-                {
-                    case BluetoothDevice.ACTION_ACL_CONNECTED:
-                        setConnected(true);
-                        Notification notification = createNotification(Tools.getLocation(context));
-                        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                            return;
-                        }
-                        NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, notification);
-                        break;
-                    case BluetoothDevice.ACTION_ACL_DISCONNECTED:
-                        setConnected(false);
-                        obtainAndSaveLocation();
-                        break;
-                }
+                String action = intent.getAction();
+                if (action != null)
+                    switch (action)
+                    {
+                        case BluetoothDevice.ACTION_ACL_CONNECTED:
+                            setConnected(true);
+                            Notification notification = createNotification(Tools.getLocation(context));
+                            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                                return;
+                            }
+                            NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, notification);
+                            break;
+                        case BluetoothDevice.ACTION_ACL_DISCONNECTED:
+                            setConnected(false);
+                            obtainAndSaveLocation();
+                            break;
+                    }
             }
         };
 
@@ -232,7 +232,6 @@ public class CarLocationService extends Service {
         if (loc != null) {
             double lat = loc.getLatitude();
             double lon = loc.getLongitude();
-            long ms = System.currentTimeMillis();
             Uri uri = Uri.parse("geo:" + lat + "," + lon + "?q=" + lat + "," + lon);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             intent.setPackage("com.google.android.apps.maps");

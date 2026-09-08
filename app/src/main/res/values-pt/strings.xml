@@ -37,4 +37,8 @@
     <string name="abrir_posici_n_en_google_maps">Abrir o local de estacionamento no Google Maps:\n</string>
     <string name="manual_text">1. Selecione o dispositivo Bluetooth do seu carro.\n\n2. Conceda à aplicação as permissões solicitadas.\n\n3. É muito importante permitir o acesso à localização selecionando a opção «Permitir sempre».\n\n4. Depois de configurada, a aplicação ficará a aguardar a desconexão do Bluetooth do carro.\n\n5. Quando o Bluetooth se desligar, a aplicação guardará a localização atual como o local onde estacionou o carro.\n\n6. Depois poderá tocar na localização guardada ou na notificação para abrir o mapa e ver onde está o carro.</string>
     <string name="instrucciones">Instruções</string>
+    <string name="ubicacion_segundo_plano_titulo">Precisamos permitir o acesso à localização em segundo plano</string>
+    <string name="ubicacion_segundo_plano_explicacion">Para guardar automaticamente onde estacionou quando fecha o ecrã ou sai da aplicação, o Leo\'s BTPark precisa de aceder à sua localização em segundo plano.</string>
+    <string name="ubicacion_segundo_plano_pasos">No ecrã seguinte:\n1. Toque em "Permissões".\n2. Selecione "Localização".\n3. Selecione "Permitir sempre".\n\nDepois, volte ao Leo\'s BTPark.</string>
+    <string name="abrir_ajustes">Abrir definições</string>
 </resources>

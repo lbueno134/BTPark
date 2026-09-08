@@ -32,7 +32,9 @@
             </intent-filter>
         </activity>
 
-        <service
+        <activity
+            android:name=".BackgroundLocationActivity"
+            android:exported="false" />        <service
             android:name=".CarLocationService"
             android:exported="false"
             android:foregroundServiceType="location" />
