@@ -2,45 +2,68 @@
 <resources>
     <string name="app_name">Leo\'s BTPark</string>
     <string name="channel_name">Parking</string>
-    <string name="channel_description">Detects the car\'s Bluetooth disconnection.</string>
+    <string name="channel_description">Detects when your car\'s Bluetooth disconnects.</string>
+
     <string name="ver_ltimo_aparcamiento">View last parking location</string>
     <string name="bluetooth_del_m_vil_est_apagado">○ Phone Bluetooth is turned off</string>
-    <string name="este_m_vil_no_tiene_bluetooth">○ This phone does not have Bluetooth</string>
+    <string name="este_m_vil_no_tiene_bluetooth">○ This phone does not support Bluetooth</string>
+
     <string name="dispositivo_bluetooth">Bluetooth device</string>
     <string name="no_hay_dispositivos_emparejados">No paired devices</string>
     <string name="no_hay_ning_n_dispositivo_bluetooth_emparejado">No Bluetooth devices are paired.</string>
+
     <string name="coche">Car</string>
     <string name="necesitas_conceder_permiso_de_ubicaci_n_precisa">You need to grant precise location permission.</string>
+
     <string name="aparcamiento">Leo\'s BTPark</string>
     <string name="bluetooth_del_coche">Car Bluetooth</string>
-    <string name="concede_tambi_n_permitir_todo_el_tiempo_para_que">Also grant "Allow all the time" so that </string>
-    <string name="pueda_registrar_el_aparcamiento_con_la_pantalla_cerrada">the parking location can be recorded while the screen is off.</string>
+
+    <string name="concede_tambi_n_permitir_todo_el_tiempo_para_que">Also select "Allow all the time" so that</string>
+    <string name="pueda_registrar_el_aparcamiento_con_la_pantalla_cerrada">the parking location can be recorded while the app is not in use.</string>
+
     <string name="seguimiento_activado">Tracking enabled.</string>
     <string name="bluetooth_del_coche_no_configurado">○ Car Bluetooth not configured</string>
+
     <string name="ltimo_aparcamiento_no_hay_ninguno_registrado">Last parking location\nNone recorded</string>
+
     <string name="guardar_configuraci_n">Save settings</string>
-    <string name="esperando_desconexi_n_del_coche">● Waiting for car disconnection</string>
+    <string name="esperando_desconexi_n_del_coche">● Waiting for car Bluetooth to disconnect</string>
     <string name="actualizar_configuraci_n">Update settings</string>
+
     <string name="ltimo_aparcamiento">Last parking location\n</string>
     <string name="precisi_n">" · Accuracy "</string>
+
     <string name="todav_a_no_hay_ning_n_aparcamiento_registrado">No parking location has been recorded yet.</string>
     <string name="no_hay_una_aplicaci_n_de_mapas_disponible">No map application is available.</string>
+
     <string name="desactivar">**Disable**</string>
-    <string name="esperando_al_conexi_n_del_coche">○ Waiting for car connection</string>
+
+    <string name="esperando_al_conexi_n_del_coche">○ Waiting for car Bluetooth to connect</string>
+
     <string name="donde_he_aparcado">Where did I park?</string>
-    <string name="coche_aparcado">"Car parked: "</string>
+    <string name="coche_aparcado">"BTPark: "</string>
     <string name="pulsa_para_ver_la_posici_n_en_google_maps">Tap to view the location in Google Maps</string>
+
     <string name="posici_n_de_aparcamiento_a_las">"Parking location at "</string>
-    <string name="he_aparcado_el_coche_en_esta_posici_n">I parked the car at this location:\n\n</string>
+
+    <string name="he_aparcado_el_coche_en_esta_posici_n">I parked my car at this location:\n\n</string>
+
     <string name="latitud">"Latitude: "</string>
     <string name="longitud">"Longitude: "</string>
-    <string name="abrir_posici_n_en_google_maps">Open parking location in Google Maps:\n</string>
-    <string name="manual_text">1. Select your car\'s Bluetooth device.\n\n2. Grant the requested permissions to the app.\n\n3. It is very important to allow location access using the "Allow all the time" option.\n\n4. Once configured, the app will remain waiting for the car\'s Bluetooth to disconnect.\n\n5. When Bluetooth disconnects, the app will save the current location as the place where you parked.\n\n6. You can then tap the saved location or the notification to open the map and see where the car is.</string>
-    <string name="instrucciones">Instructions</string>
-    <string name="ubicacion_segundo_plano_titulo">We need to allow background location access</string>
 
-    <string name="ubicacion_segundo_plano_explicacion">To automatically save where you parked when you close the screen or leave the app, Leo\'s BTPark needs to access your location in the background.</string>
+    <string name="abrir_posici_n_en_google_maps">Open parking location in Google Maps:\n</string>
+
+    <string name="manual_text">1. Select your car\'s Bluetooth device.\n\n2. Grant the requested permissions to the app.\n\n3. It is very important to allow location access using the "Allow all the time" option.\n\n4. Once configured, the app will wait for your car\'s Bluetooth to disconnect.\n\n5. When the Bluetooth connection is lost, the app will save your current location as your parking location.\n\n6. You can then tap the saved location or the notification to open the map and see where your car is parked.</string>
+
+    <string name="instrucciones">Instructions</string>
+
+    <string name="ubicacion_segundo_plano_titulo">Allow background location access</string>
+
+    <string name="ubicacion_segundo_plano_explicacion">To automatically save your parking location when you leave the app or turn off the screen, Leo\'s BTPark needs to access your location in the background.</string>
+
     <string name="ubicacion_segundo_plano_pasos">On the next screen:\n1. Tap "Permissions".\n2. Select "Location".\n3. Select "Allow all the time".\n\nThen return to Leo\'s BTPark.</string>
+
     <string name="abrir_ajustes">Open settings</string>
-    <string name="hacer_la_notificaci_n_persistente">Persistent notification</string>
+    <string name="explain_notification">You can choose whether the status notification can be dismissed or stays available at all times. If you dismiss it, you can still access the app by opening it from your device. If you choose to keep it always visible, the notification will be automatically recreated whenever it is dismissed.</string>
+    <string name="hacer_la_notificaci_n_persistente">Always keep the notification</string>
 </resources>

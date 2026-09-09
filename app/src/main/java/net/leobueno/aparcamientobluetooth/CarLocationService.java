@@ -282,7 +282,8 @@ public class CarLocationService extends Service {
                         deleteIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT |
                                 PendingIntent.FLAG_IMMUTABLE);
-
+        if (loc == null)
+             Tools.getLocation(this);
         if (loc != null) {
             double lat = loc.getLatitude();
             double lon = loc.getLongitude();
@@ -297,10 +298,16 @@ public class CarLocationService extends Service {
                         PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
                 );
             String date = Tools.getDate(loc.getTime());
+            String content = getString(R.string.pulsa_para_ver_la_posici_n_en_google_maps);
+            String address = getPrefs().getString("pos_address", null);
+            if (address != null)
+            {
+                content = address+"\n"+content;
+            }
             return new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(isconnected ? R.drawable.ic_volante : R.drawable.ic_car)
+                    .setSmallIcon(isconnected ? R.drawable.ic_volante : R.drawable.ic_parking)
                     .setContentTitle(prefix + getString(R.string.coche_aparcado) + date)
-                    .setContentText(getString(R.string.pulsa_para_ver_la_posici_n_en_google_maps))
+                    .setContentText(content)
                     .setContentIntent(pendingIntent)
                     .setColor(color)
                     .setDeleteIntent(deletePendingIntent)
@@ -320,7 +327,7 @@ public class CarLocationService extends Service {
                             (Build.VERSION.SDK_INT >= 23 ? PendingIntent.FLAG_IMMUTABLE : 0));
 
             return new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(isconnected ? R.drawable.ic_volante : R.drawable.ic_car)
+                    .setSmallIcon(isconnected ? R.drawable.ic_volante : R.drawable.ic_parking)
                     .setContentTitle(prefix + getString(R.string.aparcamiento))
                     .setContentText(getString(R.string.donde_he_aparcado))
                     .setOngoing(true)
@@ -334,7 +341,8 @@ public class CarLocationService extends Service {
                     .build();
         }
     }
-    private void saveLocation(Location location) {
+    private void saveLocation(Location location)
+    {
         SharedPreferences prefs = getPrefs();
         double lat = location.getLatitude();
         double lon = location.getLongitude();
@@ -343,11 +351,17 @@ public class CarLocationService extends Service {
                 putLong("pos_ms", ms).
                 putString("pos_latitude",Double.toString(lat)).
                 putString("pos_longitude", Double.toString(lon)).
+                putString("pos_address", null).
                 putFloat("pos_accuracy", location.hasAccuracy() ? location.getAccuracy() : -1).
                 apply();
-
+        Tools.describe(this, location, description -> {
+            getPrefs().edit().putString("pos_address", description).apply();
+            sendNotificationToScreen(location);
+        });
+        sendNotificationToScreen(location);
+    }
+    private void sendNotificationToScreen(Location location) {
         Notification notification = createNotification(location);
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             return;
         }

@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -144,7 +145,9 @@ public class MainActivity extends Activity {
     }
 
     private void createInterface() {
+        ScrollView scroll = new ScrollView(this);
         LinearLayout root = new LinearLayout(this);
+        scroll.addView(root);
         root.setOrientation(LinearLayout.VERTICAL);
         root.setPadding(dp(28), dp(28), dp(28), dp(24));
         root.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -207,10 +210,10 @@ public class MainActivity extends Activity {
         root.addView(manual, matchWrap());
 
         LinearLayout row = new LinearLayout(this);
+        row.setPadding(0, dp(28), 0, dp(4));
         row.setOrientation(LinearLayout.HORIZONTAL);
         TextView label = new TextView(this);
         label.setText(R.string.hacer_la_notificaci_n_persistente);
-        row.addView(label);
         CheckBox check = new CheckBox(this);
         check.setGravity(Gravity.RIGHT);
         boolean recreate = getPrefs().getBoolean("nt_always_on", true);
@@ -220,10 +223,17 @@ public class MainActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isCheckedNow) {
                 getPrefs().edit().putBoolean("nt_always_on", isCheckedNow).apply();
             }
-        });        row.addView(check);
+        });
+        row.addView(check);
+        row.addView(label);
         root.addView(row, matchWrap());
 
-        setContentView(root);
+        TextView explain_notification = new TextView(this);
+        explain_notification.setTextSize(12);
+        explain_notification.setText(R.string.explain_notification);
+        root.addView(explain_notification, matchWrap());
+
+        setContentView(scroll);
     }
 
     private LinearLayout.LayoutParams matchWrap() {

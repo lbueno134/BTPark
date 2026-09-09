@@ -1,44 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Estacionamento</string>
+    <string name="app_name">Leo\'s BTPark</string>
     <string name="channel_name">Estacionamento</string>
-    <string name="channel_description">Deteta a desconexão Bluetooth do carro.</string>
-    <string name="ver_ltimo_aparcamiento">Ver o último local de estacionamento</string>
-    <string name="bluetooth_del_m_vil_est_apagado">○ O Bluetooth do telemóvel está desligado</string>
-    <string name="este_m_vil_no_tiene_bluetooth">○ Este telemóvel não tem Bluetooth</string>
+    <string name="channel_description">Deteta quando o Bluetooth do seu carro é desligado.</string>
+
+    <string name="ver_ltimo_aparcamiento">Ver a última localização de estacionamento</string>
+    <string name="bluetooth_del_m_vil_est_apagado">○ O Bluetooth do telefone está desligado</string>
+    <string name="este_m_vil_no_tiene_bluetooth">○ Este telefone não suporta Bluetooth</string>
+
     <string name="dispositivo_bluetooth">Dispositivo Bluetooth</string>
-    <string name="no_hay_dispositivos_emparejados">Não existem dispositivos emparelhados</string>
-    <string name="no_hay_ning_n_dispositivo_bluetooth_emparejado">Não existe nenhum dispositivo Bluetooth emparelhado.</string>
+    <string name="no_hay_dispositivos_emparejados">Nenhum dispositivo emparelhado</string>
+    <string name="no_hay_ning_n_dispositivo_bluetooth_emparejado">Não há dispositivos Bluetooth emparelhados.</string>
+
     <string name="coche">Carro</string>
-    <string name="necesitas_conceder_permiso_de_ubicaci_n_precisa">É necessário conceder permissão para aceder à localização precisa.</string>
-    <string name="aparcamiento">Estacionamento</string>
+    <string name="necesitas_conceder_permiso_de_ubicaci_n_precisa">É necessário permitir o acesso à localização precisa.</string>
+
+    <string name="aparcamiento">Leo\'s BTPark</string>
     <string name="bluetooth_del_coche">Bluetooth do carro</string>
-    <string name="concede_tambi_n_permitir_todo_el_tiempo_para_que">Conceda também «Permitir sempre» para que </string>
-    <string name="pueda_registrar_el_aparcamiento_con_la_pantalla_cerrada">o local de estacionamento possa ser registado com o ecrã desligado.</string>
-    <string name="seguimiento_activado">Monitorização ativada.</string>
+
+    <string name="concede_tambi_n_permitir_todo_el_tiempo_para_que">Selecione também "Permitir sempre" para que</string>
+    <string name="pueda_registrar_el_aparcamiento_con_la_pantalla_cerrada">a localização de estacionamento possa ser registada quando a aplicação não estiver a ser utilizada.</string>
+
+    <string name="seguimiento_activado">Rastreamento ativado.</string>
     <string name="bluetooth_del_coche_no_configurado">○ Bluetooth do carro não configurado</string>
-    <string name="ltimo_aparcamiento_no_hay_ninguno_registrado">Último local de estacionamento\nNenhum registado</string>
+
+    <string name="ltimo_aparcamiento_no_hay_ninguno_registrado">Última localização de estacionamento\nNenhuma registada</string>
+
     <string name="guardar_configuraci_n">Guardar configuração</string>
-    <string name="esperando_desconexi_n_del_coche">● A aguardar a desconexão do carro</string>
+    <string name="esperando_desconexi_n_del_coche">● A aguardar a desconexão do Bluetooth do carro</string>
     <string name="actualizar_configuraci_n">Atualizar configuração</string>
-    <string name="ltimo_aparcamiento">Último local de estacionamento\n</string>
+
+    <string name="ltimo_aparcamiento">Última localização de estacionamento\n</string>
     <string name="precisi_n">" · Precisão "</string>
-    <string name="todav_a_no_hay_ning_n_aparcamiento_registrado">Ainda não foi registado nenhum local de estacionamento.</string>
+
+    <string name="todav_a_no_hay_ning_n_aparcamiento_registrado">Ainda não foi registada nenhuma localização de estacionamento.</string>
     <string name="no_hay_una_aplicaci_n_de_mapas_disponible">Não está disponível nenhuma aplicação de mapas.</string>
+
     <string name="desactivar">**Desativar**</string>
-    <string name="esperando_al_conexi_n_del_coche">○ A aguardar a ligação do carro</string>
+
+    <string name="esperando_al_conexi_n_del_coche">○ A aguardar a ligação do Bluetooth do carro</string>
+
     <string name="donde_he_aparcado">Onde estacionei?</string>
-    <string name="coche_aparcado">"Carro estacionado: "</string>
+    <string name="coche_aparcado">"BTPark: "</string>
     <string name="pulsa_para_ver_la_posici_n_en_google_maps">Toque para ver a localização no Google Maps</string>
-    <string name="posici_n_de_aparcamiento_a_las">"Local de estacionamento às "</string>
+
+    <string name="posici_n_de_aparcamiento_a_las">"Localização de estacionamento às "</string>
+
     <string name="he_aparcado_el_coche_en_esta_posici_n">Estacionei o carro neste local:\n\n</string>
+
     <string name="latitud">"Latitude: "</string>
     <string name="longitud">"Longitude: "</string>
-    <string name="abrir_posici_n_en_google_maps">Abrir o local de estacionamento no Google Maps:\n</string>
-    <string name="manual_text">1. Selecione o dispositivo Bluetooth do seu carro.\n\n2. Conceda à aplicação as permissões solicitadas.\n\n3. É muito importante permitir o acesso à localização selecionando a opção «Permitir sempre».\n\n4. Depois de configurada, a aplicação ficará a aguardar a desconexão do Bluetooth do carro.\n\n5. Quando o Bluetooth se desligar, a aplicação guardará a localização atual como o local onde estacionou o carro.\n\n6. Depois poderá tocar na localização guardada ou na notificação para abrir o mapa e ver onde está o carro.</string>
+
+    <string name="abrir_posici_n_en_google_maps">Abrir a localização de estacionamento no Google Maps:\n</string>
+
+    <string name="manual_text">1. Selecione o dispositivo Bluetooth do seu carro.\n\n2. Conceda à aplicação as permissões solicitadas.\n\n3. É muito importante permitir o acesso à localização através da opção "Permitir sempre".\n\n4. Depois de configurada, a aplicação ficará a aguardar que o Bluetooth do seu carro seja desligado.\n\n5. Quando a ligação Bluetooth for perdida, a aplicação guardará a sua localização atual como localização de estacionamento.\n\n6. Depois, pode tocar na localização guardada ou na notificação para abrir o mapa e ver onde o carro está estacionado.</string>
+
     <string name="instrucciones">Instruções</string>
-    <string name="ubicacion_segundo_plano_titulo">Precisamos permitir o acesso à localização em segundo plano</string>
-    <string name="ubicacion_segundo_plano_explicacion">Para guardar automaticamente onde estacionou quando fecha o ecrã ou sai da aplicação, o Leo\'s BTPark precisa de aceder à sua localização em segundo plano.</string>
+
+    <string name="ubicacion_segundo_plano_titulo">Permitir acesso à localização em segundo plano</string>
+
+    <string name="ubicacion_segundo_plano_explicacion">Para guardar automaticamente a localização onde estacionou quando sair da aplicação ou desligar o ecrã, o Leo\'s BTPark precisa de aceder à sua localização em segundo plano.</string>
+
     <string name="ubicacion_segundo_plano_pasos">No ecrã seguinte:\n1. Toque em "Permissões".\n2. Selecione "Localização".\n3. Selecione "Permitir sempre".\n\nDepois, volte ao Leo\'s BTPark.</string>
+
     <string name="abrir_ajustes">Abrir definições</string>
+    <string name="explain_notification">Pode escolher se a notificação de estado pode ser fechada ou se permanece sempre disponível. Se a fechar, pode continuar a aceder à aplicação abrindo-a no seu dispositivo. Se escolher mantê-la sempre visível, a notificação será recriada automaticamente sempre que for fechada.</string>
+    <string name="hacer_la_notificaci_n_persistente">Manter sempre a notificação</string>
 </resources>
