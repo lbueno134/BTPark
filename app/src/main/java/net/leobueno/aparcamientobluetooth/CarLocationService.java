@@ -15,6 +15,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.media.AudioAttributes;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
@@ -90,34 +93,6 @@ public class CarLocationService extends Service {
                     notificationDeletedReceiver,
                     filter);
         }
-    }
-    private void enviarCorreo(String mail, Location location) {
-
-        if (location == null) {
-            return;
-        }
-
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
-        String date = Tools.getDate(location.getTime());
-
-        String mapsUrl = "https://www.google.com/maps/search/?api=1&query="
-                + latitude + "," + longitude;
-
-        String asunto = getString(R.string.posici_n_de_aparcamiento_a_las) + date;
-
-        String cuerpo = getString(R.string.he_aparcado_el_coche_en_esta_posici_n)
-                + getString(R.string.latitud) + latitude + "\n"
-                + getString(R.string.longitud) + longitude + "\n\n"
-                + getString(R.string.abrir_posici_n_en_google_maps)
-                + mapsUrl;
-
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:"+mail));
-        intent.putExtra(Intent.EXTRA_SUBJECT, asunto);
-        intent.putExtra(Intent.EXTRA_TEXT, cuerpo);
-
-        startActivity(Intent.createChooser(intent, "Enviar posición"));
     }
     private void registerBluetoothReceiver() {
         bluetoothReceiver = new BroadcastReceiver() {
@@ -357,6 +332,18 @@ public class CarLocationService extends Service {
         Tools.describe(this, location, description -> {
             getPrefs().edit().putString("pos_address", description).apply();
             sendNotificationToScreen(location);
+            if (getPrefs().getBoolean("pk_sound", true)) {
+                Uri notificationSound = RingtoneManager.getDefaultUri(
+                        RingtoneManager.TYPE_NOTIFICATION
+                );
+                Ringtone ringtone = RingtoneManager.getRingtone(
+                        getApplicationContext(),
+                        notificationSound
+                );
+                if (ringtone != null) {
+                    ringtone.play();
+                }
+            }
         });
         sendNotificationToScreen(location);
     }

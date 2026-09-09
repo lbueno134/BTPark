@@ -66,4 +66,5 @@
     <string name="abrir_ajustes">Abrir ajustes</string>
     <string name="explain_notification">Puedes elegir si la notificación de estado se puede cerrar o si permanece disponible en todo momento. Si la cierras, puedes seguir accediendo a la aplicación abriéndola desde tu dispositivo. Si eliges mantenerla siempre visible, la notificación se volverá a crear automáticamente cada vez que la cierres.</string>
     <string name="hacer_la_notificaci_n_persistente">Mantener siempre la notificación</string>
+    <string name="notification_sound">Sonido de notificación</string>
 </resources>

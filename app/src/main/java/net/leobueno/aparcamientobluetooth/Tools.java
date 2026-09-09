@@ -1,11 +1,13 @@
 package net.leobueno.aparcamientobluetooth;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 import java.io.IOException;
 import java.sql.Time;

@@ -208,13 +208,34 @@ public class MainActivity extends Activity {
         manual.setTextSize(12);
         manual.setText(R.string.manual_text);
         root.addView(manual, matchWrap());
-
-        LinearLayout row = new LinearLayout(this);
+        LinearLayout row;
+        TextView label;
+        CheckBox check;
+        row = new LinearLayout(this);
         row.setPadding(0, dp(28), 0, dp(4));
         row.setOrientation(LinearLayout.HORIZONTAL);
-        TextView label = new TextView(this);
+        label = new TextView(this);
+        label.setText(R.string.notification_sound);
+        check = new CheckBox(this);
+        check.setGravity(Gravity.RIGHT);
+        boolean pk_sound = getPrefs().getBoolean("pk_sound", true);
+        check.setChecked(pk_sound);
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isCheckedNow) {
+                getPrefs().edit().putBoolean("pk_sound", isCheckedNow).apply();
+            }
+        });
+        row.addView(check);
+        row.addView(label);
+        root.addView(row, matchWrap());
+
+        row = new LinearLayout(this);
+        row.setPadding(0, dp(28), 0, dp(4));
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        label = new TextView(this);
         label.setText(R.string.hacer_la_notificaci_n_persistente);
-        CheckBox check = new CheckBox(this);
+        check = new CheckBox(this);
         check.setGravity(Gravity.RIGHT);
         boolean recreate = getPrefs().getBoolean("nt_always_on", true);
         check.setChecked(recreate);
@@ -464,12 +485,13 @@ public class MainActivity extends Activity {
                     R.string.ltimo_aparcamiento_no_hay_ninguno_registrado);
         } else {
             String date = Tools.getDate(loc.getTime());
-
+            String pos_address = getPrefs().getString("pos_address", null);
             lastParkingText.setText(
                     getString(R.string.ltimo_aparcamiento) +
                     date +
                     getString(R.string.precisi_n) +
-                    String.format(Locale.getDefault(), "%.0f m", loc.getAccuracy()));
+                    String.format(Locale.getDefault(), "%.0f m", loc.getAccuracy()) +
+                    (pos_address != null ? "\n"+pos_address : ""));
         }
     }
     private boolean isConnected()

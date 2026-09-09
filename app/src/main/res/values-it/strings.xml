@@ -66,4 +66,5 @@
     <string name="abrir_ajustes">Apri impostazioni</string>
     <string name="explain_notification">Puoi scegliere se la notifica di stato può essere chiusa o se deve rimanere sempre disponibile. Se la chiudi, puoi comunque accedere all\'app aprendola dal tuo dispositivo. Se scegli di mantenerla sempre visibile, la notifica verrà ricreata automaticamente ogni volta che viene chiusa.</string>
     <string name="hacer_la_notificaci_n_persistente">Mantieni sempre la notifica</string>
+    <string name="notification_sound">Suono di notifica</string>
 </resources>

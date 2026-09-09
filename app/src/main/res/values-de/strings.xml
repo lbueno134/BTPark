@@ -66,4 +66,5 @@
     <string name="abrir_ajustes">Einstellungen öffnen</string>
     <string name="explain_notification">Du kannst wählen, ob die Statusbenachrichtigung geschlossen werden kann oder jederzeit verfügbar bleibt. Wenn du sie schließt, kannst du weiterhin auf die App zugreifen, indem du sie auf deinem Gerät öffnest. Wenn du sie dauerhaft sichtbar halten möchtest, wird die Benachrichtigung jedes Mal automatisch neu erstellt, wenn sie geschlossen wird.</string>
     <string name="hacer_la_notificaci_n_persistente">Benachrichtigung immer anzeigen</string>
+    <string name="notification_sound">Benachrichtigungston</string>
 </resources>

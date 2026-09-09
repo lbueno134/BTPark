@@ -66,4 +66,5 @@
     <string name="abrir_ajustes">Ouvrir les paramètres</string>
     <string name="explain_notification">Vous pouvez choisir si la notification d’état peut être fermée ou si elle doit rester disponible à tout moment. Si vous la fermez, vous pouvez toujours accéder à l’application en l’ouvrant depuis votre appareil. Si vous choisissez de la garder toujours visible, la notification sera automatiquement recréée chaque fois qu’elle est fermée.</string>
     <string name="hacer_la_notificaci_n_persistente">Toujours conserver la notification</string>
+    <string name="notification_sound">Son de notification</string>
 </resources>
