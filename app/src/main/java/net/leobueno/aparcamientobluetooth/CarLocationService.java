@@ -1,6 +1,7 @@
 package net.leobueno.aparcamientobluetooth;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -16,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -75,6 +77,7 @@ public class CarLocationService extends Service {
                     }
                 }
             };
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     @Override
     public void onCreate() {
         super.onCreate();
@@ -333,6 +336,17 @@ public class CarLocationService extends Service {
             getPrefs().edit().putString("pos_address", description).apply();
             sendNotificationToScreen(location);
             if (getPrefs().getBoolean("pk_sound", true)) {
+                MediaPlayer mediaPlayer = MediaPlayer.create(
+                        this,
+                        R.raw.sound
+                );
+
+                if (mediaPlayer != null) {
+                    mediaPlayer.setOnCompletionListener(MediaPlayer::release);
+                    mediaPlayer.start();
+                }
+            }
+/*            if (getPrefs().getBoolean("pk_sound", true)) {
                 Uri notificationSound = RingtoneManager.getDefaultUri(
                         RingtoneManager.TYPE_NOTIFICATION
                 );
@@ -343,7 +357,7 @@ public class CarLocationService extends Service {
                 if (ringtone != null) {
                     ringtone.play();
                 }
-            }
+            }*/
         });
         sendNotificationToScreen(location);
     }
