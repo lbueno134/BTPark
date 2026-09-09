@@ -26,6 +26,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -148,15 +150,45 @@ public class MainActivity extends Activity {
         ScrollView scroll = new ScrollView(this);
         LinearLayout root = new LinearLayout(this);
         scroll.addView(root);
+
         root.setOrientation(LinearLayout.VERTICAL);
         root.setPadding(dp(28), dp(28), dp(28), dp(24));
         root.setGravity(Gravity.CENTER_HORIZONTAL);
+
+// Cabecera
+        FrameLayout titleContainer = new FrameLayout(this);
 
         TextView title = new TextView(this);
         title.setText(R.string.aparcamiento);
         title.setTextSize(28);
         title.setGravity(Gravity.CENTER);
-        root.addView(title, matchWrap());
+
+        FrameLayout.LayoutParams titleParams =
+                new FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                        Gravity.CENTER);
+
+        titleContainer.addView(title, titleParams);
+
+// Icono a la izquierda del título
+        ImageView icon = new ImageView(this);
+        icon.setImageResource(R.mipmap.ic_launcher);
+
+        FrameLayout.LayoutParams iconParams =
+                new FrameLayout.LayoutParams(
+                        dp(48),
+                        dp(48),
+                        Gravity.CENTER_VERTICAL);
+
+        iconParams.leftMargin = dp(12);
+
+        titleContainer.addView(icon, iconParams);
+
+        root.addView(titleContainer,
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        dp(56)));
 
         TextView bluetoothLabel = new TextView(this);
         bluetoothLabel.setText(R.string.bluetooth_del_coche);

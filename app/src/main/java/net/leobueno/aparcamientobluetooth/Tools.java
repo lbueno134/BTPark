@@ -56,6 +56,7 @@ public class Tools {
 
                     @Override
                     public void onError(String errorMessage) {
+                        callback.accept(null);
                     }
                 });
             } else {
@@ -65,10 +66,12 @@ public class Tools {
                     if (addresses != null && !addresses.isEmpty()) {
                         String descripcionLugar = addresses.get(0).getAddressLine(0);
                         callback.accept(descripcionLugar);
+                        return;
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                callback.accept(null);
             }
         }
     }
