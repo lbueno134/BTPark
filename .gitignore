@@ -1,6 +1,8 @@
 # Android Studio
 .idea/
 *.iml
+*.aab
+*.apk
 
 # Gradle
 .gradle/
@@ -9,6 +11,8 @@ build/
 
 # Local configuration
 local.properties
+AparcamientoBluetooth.code-workspace
+LeoFSSim_keystore.keystore
 
 # Generated files
 captures/
