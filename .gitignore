@@ -13,6 +13,7 @@ build/
 local.properties
 AparcamientoBluetooth.code-workspace
 LeoFSSim_keystore.keystore
+gradle/gradle-daemon-jvm.properties
 
 # Generated files
 captures/
