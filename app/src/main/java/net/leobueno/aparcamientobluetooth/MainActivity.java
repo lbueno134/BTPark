@@ -186,6 +186,12 @@ public class MainActivity extends Activity {
         divider.setLayoutParams(params);
         return divider;
     }
+    void setClickable(View text, View.OnClickListener listener) {
+        text.setOnClickListener(listener);
+        text.setClickable(true);
+        text.setFocusable(true);
+        text.setBackground(getDrawable(android.R.drawable.list_selector_background));
+    }
     private void createInterface() {
         ScrollView scroll = new ScrollView(this);
         LinearLayout root = new LinearLayout(this);
@@ -235,11 +241,12 @@ public class MainActivity extends Activity {
         statusText.setTextSize(16);
         statusText.setPadding(0, dp(4), 0, dp(4));
         root.addView(statusText, matchWrap());
-
+        setClickable(statusText, v -> openLastParking());
         lastParkingText = new TextView(this);
         lastParkingText.setTextSize(14);
         lastParkingText.setPadding(0, dp(4), 0, dp(8));
         root.addView(lastParkingText, matchWrap());
+        setClickable(lastParkingText, v -> openLastParking());
         root.addView(splitter());
 //Selección de bluetooth
         TextView bluetoothLabel = new TextView(this);
