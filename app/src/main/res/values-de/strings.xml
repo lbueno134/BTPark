@@ -36,7 +36,7 @@
     <string name="todav_a_no_hay_ning_n_aparcamiento_registrado">Es wurde noch kein Parkplatz gespeichert.</string>
     <string name="no_hay_una_aplicaci_n_de_mapas_disponible">Keine Karten-App verfügbar.</string>
 
-    <string name="desactivar">**Deaktivieren**</string>
+    <string name="desactivar">🚫 Kein Auto ausgewählt</string>
 
     <string name="esperando_al_conexi_n_del_coche">○ Warten auf die Bluetooth-Verbindung des Autos</string>
 
@@ -67,4 +67,8 @@
     <string name="explain_notification">Du kannst wählen, ob die Statusbenachrichtigung geschlossen werden kann oder jederzeit verfügbar bleibt. Wenn du sie schließt, kannst du weiterhin auf die App zugreifen, indem du sie auf deinem Gerät öffnest. Wenn du sie dauerhaft sichtbar halten möchtest, wird die Benachrichtigung jedes Mal automatisch neu erstellt, wenn sie geschlossen wird.</string>
     <string name="hacer_la_notificaci_n_persistente">Benachrichtigung immer anzeigen</string>
     <string name="notification_sound">Benachrichtigungston</string>
+    <string name="parking_date_today">Heute %1$s um %2$s</string>
+    <string name="parking_date_yesterday">Gestern %1$s um %2$s</string>
+    <string name="parking_date_days_ago">%1$s vor %2$d Tagen um %3$s</string>
+    <string name="parking_date_old">%1$s, %2$s um %3$s</string>
 </resources>

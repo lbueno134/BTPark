@@ -16,14 +16,16 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.media.AudioAttributes;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
+import android.os.VibrationAttributes;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.os.VibratorManager;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -39,7 +41,9 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 
+import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 
 public class CarLocationService extends Service {
 
@@ -48,7 +52,32 @@ public class CarLocationService extends Service {
 
     private static final String PREFS = "car_tracker";
     private static final String KEY_ADDRESS = "car_bluetooth_address";
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
+    private final Runnable midnightUpdater = new Runnable() {
+        @Override
+        public void run() {
+            sendNotificationToScreen(Tools.getLocation(getBaseContext()));
+
+            // Programar la siguiente medianoche
+            scheduleMidnightUpdate();
+        }
+    };
+    private void scheduleMidnightUpdate() {
+        Calendar nextMidnight = Calendar.getInstance();
+
+        nextMidnight.add(Calendar.DAY_OF_YEAR, 1);
+        nextMidnight.set(Calendar.HOUR_OF_DAY, 0);
+        nextMidnight.set(Calendar.MINUTE, 0);
+        nextMidnight.set(Calendar.SECOND, 0);
+        nextMidnight.set(Calendar.MILLISECOND, 0);
+
+        long delay = nextMidnight.getTimeInMillis()
+                - System.currentTimeMillis();
+
+//        handler.postDelayed(midnightUpdater, delay);
+        handler.postDelayed(midnightUpdater, 10000);
+    }
     private FusedLocationProviderClient locationClient;
     private BroadcastReceiver bluetoothReceiver;
     private final AtomicBoolean gettingLocation = new AtomicBoolean(false);
@@ -96,6 +125,7 @@ public class CarLocationService extends Service {
                     notificationDeletedReceiver,
                     filter);
         }
+        scheduleMidnightUpdate();
     }
     private void registerBluetoothReceiver() {
         bluetoothReceiver = new BroadcastReceiver() {
@@ -180,7 +210,33 @@ public class CarLocationService extends Service {
                     filter);
         }
     }
+    public void vibrate() {
+        VibratorManager vibratorManager = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            vibratorManager = (VibratorManager) getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
+            if (vibratorManager == null) {
+                return;
+            }
+            Vibrator vibrator = vibratorManager.getDefaultVibrator();
+            if (!vibrator.hasVibrator()) {
+                return;
+            }
+            VibrationEffect effect = VibrationEffect.createOneShot(
+                    500,
+                    VibrationEffect.DEFAULT_AMPLITUDE
+            );
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 
+                VibrationAttributes attributes =
+                        new VibrationAttributes.Builder()
+                                .setUsage(VibrationAttributes.USAGE_NOTIFICATION)
+                                .build();
+                vibrator.vibrate(effect, attributes);
+            } else {
+                vibrator.vibrate(effect);
+            }
+        }
+    }
     private void obtainAndSaveLocation() {
         if (!gettingLocation.compareAndSet(false, true)) {
             return;
@@ -275,7 +331,7 @@ public class CarLocationService extends Service {
                         intent,
                         PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
                 );
-            String date = Tools.getDate(loc.getTime());
+            String date = Tools.getDate(getBaseContext(), loc.getTime());
             String content = getString(R.string.pulsa_para_ver_la_posici_n_en_google_maps);
             String address = getPrefs().getString("pos_address", null);
             if (address != null)
@@ -290,6 +346,8 @@ public class CarLocationService extends Service {
                     .setColor(color)
                     .setDeleteIntent(deletePendingIntent)
                     .setAutoCancel(false)
+                    .setWhen(loc.getTime())
+                    .setShowWhen(true)
                     .setCategory(Notification.CATEGORY_SERVICE)
                     .setOngoing(true)
                     .build();
@@ -312,6 +370,7 @@ public class CarLocationService extends Service {
                     .setAutoCancel(false)
                     .setCategory(Notification.CATEGORY_SERVICE)
                     .setColor(color)
+                    .setShowWhen(false)
                     .setDeleteIntent(deletePendingIntent)
                     .setPriority(
                             NotificationCompat.PRIORITY_LOW)
@@ -345,6 +404,7 @@ public class CarLocationService extends Service {
                     mediaPlayer.setOnCompletionListener(MediaPlayer::release);
                     mediaPlayer.start();
                 }
+                vibrate();
             }
 /*            if (getPrefs().getBoolean("pk_sound", true)) {
                 Uri notificationSound = RingtoneManager.getDefaultUri(
@@ -440,6 +500,7 @@ public class CarLocationService extends Service {
             unregisterReceiver(notificationDeletedReceiver);
         } catch (Exception ignored) {
         }
+        handler.removeCallbacks(midnightUpdater);
         super.onDestroy();
     }
 

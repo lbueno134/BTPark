@@ -36,7 +36,7 @@
     <string name="todav_a_no_hay_ning_n_aparcamiento_registrado">Aucun emplacement de stationnement n\'a encore été enregistré.</string>
     <string name="no_hay_una_aplicaci_n_de_mapas_disponible">Aucune application de cartographie n\'est disponible.</string>
 
-    <string name="desactivar">**Désactiver**</string>
+    <string name="desactivar">🚫 Aucune voiture sélectionnée</string>
 
     <string name="esperando_al_conexi_n_del_coche">○ En attente de la connexion du Bluetooth de la voiture</string>
 
@@ -67,4 +67,8 @@
     <string name="explain_notification">Vous pouvez choisir si la notification d’état peut être fermée ou si elle doit rester disponible à tout moment. Si vous la fermez, vous pouvez toujours accéder à l’application en l’ouvrant depuis votre appareil. Si vous choisissez de la garder toujours visible, la notification sera automatiquement recréée chaque fois qu’elle est fermée.</string>
     <string name="hacer_la_notificaci_n_persistente">Toujours conserver la notification</string>
     <string name="notification_sound">Son de notification</string>
+    <string name="parking_date_today">Aujourd’hui %1$s à %2$s</string>
+    <string name="parking_date_yesterday">Hier %1$s à %2$s</string>
+    <string name="parking_date_days_ago">Il y a %2$d jours, %1$s à %3$s</string>
+    <string name="parking_date_old">%1$s %2$s à %3$s</string>
 </resources>

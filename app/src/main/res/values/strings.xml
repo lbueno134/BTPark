@@ -36,7 +36,7 @@
     <string name="todav_a_no_hay_ning_n_aparcamiento_registrado">No parking location has been recorded yet.</string>
     <string name="no_hay_una_aplicaci_n_de_mapas_disponible">No map application is available.</string>
 
-    <string name="desactivar">**Disable**</string>
+    <string name="desactivar">🚫 No car selected</string>
 
     <string name="esperando_al_conexi_n_del_coche">○ Waiting for car Bluetooth to connect</string>
 
@@ -67,4 +67,8 @@
     <string name="explain_notification">You can choose whether the status notification can be dismissed or stays available at all times. If you dismiss it, you can still access the app by opening it from your device. If you choose to keep it always visible, the notification will be automatically recreated whenever it is dismissed.</string>
     <string name="hacer_la_notificaci_n_persistente">Always keep the notification</string>
     <string name="notification_sound">Notification sound</string>
+    <string name="parking_date_today">Today %1$s at %2$s</string>
+    <string name="parking_date_yesterday">Yesterday %1$s at %2$s</string>
+    <string name="parking_date_days_ago">%1$s, %2$d days ago at %3$s</string>
+    <string name="parking_date_old">%1$s %2$s at %3$s</string>
 </resources>

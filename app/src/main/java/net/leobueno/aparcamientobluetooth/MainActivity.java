@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
@@ -39,9 +41,24 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
+enum BTCategory
+{
+    BTCar,
+    BTPhones,
+    BTAudio,
+    BTComputer,
+    BTMobile,
+    BTWearable,
+    BTGlasses,
+    BTNone,
+    BTOther
+}
 
 public class MainActivity extends Activity {
 
@@ -146,6 +163,29 @@ public class MainActivity extends Activity {
         handler.removeCallbacks(refresh);
     }
 
+    View splitter() {
+        View divider = new View(this); // Usa 'getContext()' si estás en un Fragment
+
+// 2. Definir el color de fondo (usamos el gris estándar del sistema)
+//        divider.setBackgroundResource(android.R.drawable.divider_horizontal_bright);
+// Alternativa con color hexadecimal propio:
+        divider.setBackgroundColor(Color.parseColor("#888888"));
+
+        // 3. Configurar dimensiones y márgenes (Ancho: MATCH_PARENT, Alto: 1dp o 2dp)
+        int thicknessInPx = (int) (1 * getResources().getDisplayMetrics().density); // Convierte 1dp a píxeles de forma exacta
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                thicknessInPx
+        );
+
+        // 4. Configurar los márgenes verticales (separación con los bloques)
+        int marginInPx = (int) (8 * getResources().getDisplayMetrics().density); // Convierte 16dp a píxeles
+        params.setMargins(0, marginInPx, 0, marginInPx);
+
+// 5. Aplicar los parámetros a la vista
+        divider.setLayoutParams(params);
+        return divider;
+    }
     private void createInterface() {
         ScrollView scroll = new ScrollView(this);
         LinearLayout root = new LinearLayout(this);
@@ -189,11 +229,23 @@ public class MainActivity extends Activity {
                 new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         dp(56)));
+        root.addView(splitter());
+//Estado de aparcamiento
+        statusText = new TextView(this);
+        statusText.setTextSize(16);
+        statusText.setPadding(0, dp(4), 0, dp(4));
+        root.addView(statusText, matchWrap());
 
+        lastParkingText = new TextView(this);
+        lastParkingText.setTextSize(14);
+        lastParkingText.setPadding(0, dp(4), 0, dp(8));
+        root.addView(lastParkingText, matchWrap());
+        root.addView(splitter());
+//Selección de bluetooth
         TextView bluetoothLabel = new TextView(this);
         bluetoothLabel.setText(R.string.bluetooth_del_coche);
         bluetoothLabel.setTextSize(16);
-        bluetoothLabel.setPadding(0, dp(36), 0, dp(8));
+        bluetoothLabel.setPadding(0, dp(0), 0, dp(8));
         root.addView(bluetoothLabel, matchWrap());
 
         bluetoothSpinner = new Spinner(this);
@@ -216,35 +268,18 @@ public class MainActivity extends Activity {
                 saveConfiguration();
             }
         });
-        statusText = new TextView(this);
-        statusText.setTextSize(16);
-        statusText.setPadding(0, dp(28), 0, dp(4));
-        root.addView(statusText, matchWrap());
-
-        lastParkingText = new TextView(this);
-        lastParkingText.setTextSize(14);
-        lastParkingText.setPadding(0, dp(18), 0, dp(20));
-        root.addView(lastParkingText, matchWrap());
+        root.addView(splitter());
 
         Button mapsButton = new Button(this);
         mapsButton.setText(R.string.ver_ltimo_aparcamiento);
         mapsButton.setOnClickListener(v -> openLastParking());
         root.addView(mapsButton, matchWrap());
 
-        TextView titulo_manual = new TextView(this);
-        titulo_manual.setTextSize(18);
-        titulo_manual.setText(R.string.instrucciones);
-        root.addView(titulo_manual, matchWrap());
-
-        TextView manual = new TextView(this);
-        manual.setTextSize(12);
-        manual.setText(R.string.manual_text);
-        root.addView(manual, matchWrap());
         LinearLayout row;
         TextView label;
         CheckBox check;
         row = new LinearLayout(this);
-        row.setPadding(0, dp(28), 0, dp(4));
+        row.setPadding(0, dp(5), 0, 0);
         row.setOrientation(LinearLayout.HORIZONTAL);
         label = new TextView(this);
         label.setText(R.string.notification_sound);
@@ -263,7 +298,7 @@ public class MainActivity extends Activity {
         root.addView(row, matchWrap());
 
         row = new LinearLayout(this);
-        row.setPadding(0, dp(28), 0, dp(4));
+        row.setPadding(0, 0, 0, dp(5));
         row.setOrientation(LinearLayout.HORIZONTAL);
         label = new TextView(this);
         label.setText(R.string.hacer_la_notificaci_n_persistente);
@@ -279,12 +314,24 @@ public class MainActivity extends Activity {
         });
         row.addView(check);
         row.addView(label);
-        root.addView(row, matchWrap());
 
         TextView explain_notification = new TextView(this);
         explain_notification.setTextSize(12);
         explain_notification.setText(R.string.explain_notification);
         root.addView(explain_notification, matchWrap());
+        root.addView(row, matchWrap());
+
+        root.addView(splitter());
+        TextView titulo_manual = new TextView(this);
+        titulo_manual.setTextSize(18);
+        titulo_manual.setText(R.string.instrucciones);
+        root.addView(titulo_manual, matchWrap());
+
+        TextView manual = new TextView(this);
+        manual.setTextSize(12);
+        manual.setText(R.string.manual_text);
+        root.addView(manual, matchWrap());
+
 
         setContentView(scroll);
     }
@@ -337,7 +384,101 @@ public class MainActivity extends Activity {
         return ContextCompat.checkSelfPermission(this, permission)
                 == PackageManager.PERMISSION_GRANTED;
     }
+    private String iconBT(BTCategory category)
+    {
+        switch (category) {
+            case BTCar:
+                return "\uD83D\uDE98\uFE0E";
+            case BTPhones:
+                return "\uD83C\uDFA7\uFE0E";
+            case BTAudio:
+                return "\uD83D\uDD0A\uFE0E";
+            case BTComputer:
+                return "\uD83D\uDCBB\uFE0E";
+            case BTMobile:
+                return "\uD83D\uDCF1\uFE0E";
+            case BTWearable:
+                return "⌚\uFE0E";
+            case BTGlasses:
+            case BTNone:
+            case BTOther:
+            default:
+                return "ᛒ";
+        }
+    }
+    private BTCategory getCategory(BluetoothClass clase)
+    {
+        BTCategory category = BTCategory.BTNone;
+        if (clase != null) {
+            int idclass = clase.getDeviceClass() & 0x1FFF;
+            switch (idclass) {
+                // 🚗 COCHE
+                case BluetoothClass.Device.AUDIO_VIDEO_CAR_AUDIO:
+                case BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE:
+                    category = BTCategory.BTCar;
+                    break;
 
+                // 🎧 AURICULARES
+                case BluetoothClass.Device.AUDIO_VIDEO_HEADPHONES:
+                case BluetoothClass.Device.AUDIO_VIDEO_WEARABLE_HEADSET:
+                    category = BTCategory.BTPhones;
+                    break;
+                case BluetoothClass.Device.AUDIO_VIDEO_LOUDSPEAKER:
+                case BluetoothClass.Device.AUDIO_VIDEO_PORTABLE_AUDIO:
+                case BluetoothClass.Device.AUDIO_VIDEO_SET_TOP_BOX:
+                case BluetoothClass.Device.AUDIO_VIDEO_HIFI_AUDIO:
+                case BluetoothClass.Device.AUDIO_VIDEO_VIDEO_DISPLAY_AND_LOUDSPEAKER:
+                    category = BTCategory.BTAudio;
+                    break;
+                // 📱 TELÉFONOS (Clases mayores externas a Audio/Video)
+                case BluetoothClass.Device.PHONE_CELLULAR:
+                case BluetoothClass.Device.PHONE_CORDLESS:
+                case BluetoothClass.Device.PHONE_ISDN:
+                case BluetoothClass.Device.PHONE_MODEM_OR_GATEWAY:
+                case BluetoothClass.Device.PHONE_SMART:
+                case BluetoothClass.Device.PHONE_UNCATEGORIZED:
+                    category = BTCategory.BTMobile;
+                    break;
+                case BluetoothClass.Device.WEARABLE_GLASSES:
+                case BluetoothClass.Device.WEARABLE_HELMET:
+                    category = BTCategory.BTGlasses;
+                    break;
+                case BluetoothClass.Device.WEARABLE_PAGER:
+                case BluetoothClass.Device.WEARABLE_UNCATEGORIZED:
+                case BluetoothClass.Device.WEARABLE_WRIST_WATCH:
+                    category = BTCategory.BTWearable;
+                    break;
+                // 💻 ORDENADORES (Clases mayores externas a Audio/Video)
+                case BluetoothClass.Device.WEARABLE_JACKET:
+                case BluetoothClass.Device.COMPUTER_LAPTOP:
+                case BluetoothClass.Device.COMPUTER_DESKTOP:
+                    category = BTCategory.BTComputer;
+                    break;
+
+                // 🪵 OTROS (Todo el resto de Audio, Video y periféricos)
+                case BluetoothClass.Device.AUDIO_VIDEO_MICROPHONE:
+                case BluetoothClass.Device.AUDIO_VIDEO_VCR:
+                case BluetoothClass.Device.AUDIO_VIDEO_VIDEO_CAMERA:
+                case BluetoothClass.Device.AUDIO_VIDEO_CAMCORDER:
+                case BluetoothClass.Device.AUDIO_VIDEO_VIDEO_MONITOR:
+                default:
+                    category = BTCategory.BTOther;
+                    break;
+            }
+        }
+        return category;
+    }
+    private int getCategoryPriority(BluetoothDevice d)
+    {
+        try {
+            return getCategory(d.getBluetoothClass()).ordinal();
+        }
+        catch (SecurityException e)
+        {
+
+        }
+        return 1000;
+    }
     private void loadBluetoothDevices() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
                 !hasPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
@@ -368,24 +509,51 @@ public class MainActivity extends Activity {
             return;
         }
         Set<BluetoothDevice> bonded = adapter.getBondedDevices();
+        List<BluetoothDevice> sortedDevices = new ArrayList<>(bonded);
 
-        for (BluetoothDevice device : bonded) {
+// 2. Definir el Comparator combinando Categoría + Nombre
+        Comparator<BluetoothDevice> categoryAndNameComparator = new Comparator<BluetoothDevice>() {
+            @Override
+            public int compare(BluetoothDevice d1, BluetoothDevice d2) {
+                try {
+                    int cat1 = getCategoryPriority(d1);
+                    int cat2 = getCategoryPriority(d2);
+
+                    // Si pertenecen a la misma categoría, desempatamos alfabéticamente por su nombre
+                    if (cat1 == cat2) {
+                        String name1 = d1.getName() != null ? d1.getName() : "";
+                        String name2 = d2.getName() != null ? d2.getName() : "";
+                        return name1.compareToIgnoreCase(name2);
+                    }
+
+                    // Si son de distintas categorías, ordena según el peso asignado (0, 1, 2...)
+                    return Integer.compare(cat1, cat2);
+                } catch (SecurityException e) {
+                    return 0;
+                }
+            }
+        };
+
+// 3. Ejecutar la ordenación
+        sortedDevices.sort(categoryAndNameComparator);
+        for (BluetoothDevice device : sortedDevices) {
 
             String name;
+            BluetoothClass clase = null;
             try {
                 name = device.getName();
+                clase = device.getBluetoothClass();
             } catch (SecurityException e) {
                 name = null;
             }
 //Los dispositivos sin nombre no se añaden a la lista
             if (name != null && !name.trim().isEmpty()) {
                 devices.add(device);
-                names.add(name);
+                names.add(iconBT(getCategory(clase))+" "+name);
             }
         }
-
         if (names.isEmpty()) {
-            names.add(getString(R.string.no_hay_dispositivos_emparejados));
+            names.add("❌ "+getString(R.string.no_hay_dispositivos_emparejados));
         }
         else
         {
@@ -516,7 +684,7 @@ public class MainActivity extends Activity {
             lastParkingText.setText(
                     R.string.ltimo_aparcamiento_no_hay_ninguno_registrado);
         } else {
-            String date = Tools.getDate(loc.getTime());
+            String date = Tools.getDate(this, loc.getTime());
             String pos_address = getPrefs().getString("pos_address", null);
             lastParkingText.setText(
                     getString(R.string.ltimo_aparcamiento) +
