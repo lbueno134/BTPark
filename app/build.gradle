@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'net.leobueno.aparcamientobluetooth'
+    namespace 'net.leobueno.aparcamiento'
     compileSdk 36
 
     defaultConfig {
-        applicationId 'net.leobueno.aparcamientobluetooth'
+        applicationId 'net.leobueno.aparcamiento'
         minSdk 26
         targetSdk 36
         versionCode 1
