@@ -58,11 +58,8 @@
     <string name="instrucciones">Instructions</string>
 
     <string name="ubicacion_segundo_plano_titulo">Allow background location access</string>
-
-    <string name="ubicacion_segundo_plano_explicacion">To automatically save your parking location when you leave the app or turn off the screen, Leo\'s BTPark needs to access your location in the background.</string>
-
-    <string name="ubicacion_segundo_plano_pasos">On the next screen:\n1. Tap "Permissions".\n2. Select "Location".\n3. Select "Allow all the time".\n\nThen return to Leo\'s BTPark.</string>
-
+    <string name="ubicacion_segundo_plano_explicacion">To automatically save your parking location when you leave the app or turn off the screen, Leo\'s BTPark needs to access your location in the background. You cannot continue until you have granted the app "Allow all the time" location access.</string>
+    <string name="ubicacion_segundo_plano_pasos">On the next screen:\n1. Tap "Permissions".\n2. Select "Location".\n3. Select "Allow all the time".\n\nThis screen will remain open until you grant the required permission. Once the permission has been correctly granted, Leo\'s BTPark will automatically return to the main screen.</string>
     <string name="abrir_ajustes">Open settings</string>
     <string name="explain_notification">You can choose whether the status notification can be dismissed or stays available at all times. If you dismiss it, you can still access the app by opening it from your device. If you choose to keep it always visible, the notification will be automatically recreated whenever it is dismissed.</string>
     <string name="hacer_la_notificaci_n_persistente">Always keep the notification</string>

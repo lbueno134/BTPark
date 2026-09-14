@@ -56,13 +56,9 @@
     <string name="manual_text">1. Wählen Sie das Bluetooth-Gerät Ihres Autos aus.\n\n2. Erteilen Sie der App die angeforderten Berechtigungen.\n\n3. Es ist sehr wichtig, den Standortzugriff über die Option "Immer zulassen" zu erlauben.\n\n4. Nach der Einrichtung wartet die App darauf, dass die Bluetooth-Verbindung Ihres Autos getrennt wird.\n\n5. Sobald die Bluetooth-Verbindung getrennt wird, speichert die App Ihren aktuellen Standort als Parkplatz.\n\n6. Anschließend können Sie auf den gespeicherten Standort oder die Benachrichtigung tippen, um die Karte zu öffnen und zu sehen, wo Ihr Auto geparkt ist.</string>
 
     <string name="instrucciones">Anleitung</string>
-
     <string name="ubicacion_segundo_plano_titulo">Hintergrundzugriff auf den Standort erlauben</string>
-
-    <string name="ubicacion_segundo_plano_explicacion">Damit der Parkplatz automatisch gespeichert werden kann, wenn Sie die App verlassen oder den Bildschirm ausschalten, benötigt Leo\'s BTPark Zugriff auf Ihren Standort im Hintergrund.</string>
-
-    <string name="ubicacion_segundo_plano_pasos">Auf dem nächsten Bildschirm:\n1. Tippen Sie auf "Berechtigungen".\n2. Wählen Sie "Standort".\n3. Wählen Sie "Immer zulassen".\n\nKehren Sie anschließend zu Leo\'s BTPark zurück.</string>
-
+    <string name="ubicacion_segundo_plano_explicacion">Damit dein Parkplatz automatisch gespeichert werden kann, wenn du die App verlässt oder den Bildschirm ausschaltest, benötigt Leo\'s BTPark Zugriff auf deinen Standort im Hintergrund. Du kannst erst fortfahren, wenn du der App den Standortzugriff "Immer zulassen" gewährt hast.</string>
+    <string name="ubicacion_segundo_plano_pasos">Auf dem nächsten Bildschirm:\n1. Tippe auf "Berechtigungen".\n2. Wähle "Standort" aus.\n3. Wähle "Immer zulassen" aus.\n\nDieser Bildschirm bleibt geöffnet, bis du die erforderliche Berechtigung erteilt hast. Sobald die Berechtigung korrekt erteilt wurde, kehrt Leo\'s BTPark automatisch zum Hauptbildschirm zurück.</string>
     <string name="abrir_ajustes">Einstellungen öffnen</string>
     <string name="explain_notification">Du kannst wählen, ob die Statusbenachrichtigung geschlossen werden kann oder jederzeit verfügbar bleibt. Wenn du sie schließt, kannst du weiterhin auf die App zugreifen, indem du sie auf deinem Gerät öffnest. Wenn du sie dauerhaft sichtbar halten möchtest, wird die Benachrichtigung jedes Mal automatisch neu erstellt, wenn sie geschlossen wird.</string>
     <string name="hacer_la_notificaci_n_persistente">Benachrichtigung immer anzeigen</string>

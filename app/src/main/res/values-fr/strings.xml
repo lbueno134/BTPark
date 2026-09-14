@@ -56,13 +56,9 @@
     <string name="manual_text">1. Sélectionnez l\'appareil Bluetooth de votre voiture.\n\n2. Accordez à l\'application les autorisations demandées.\n\n3. Il est très important d\'autoriser l\'accès à la position en sélectionnant l\'option "Toujours autoriser".\n\n4. Une fois configurée, l\'application attendra que le Bluetooth de votre voiture se déconnecte.\n\n5. Lorsque la connexion Bluetooth est perdue, l\'application enregistrera votre position actuelle comme emplacement de stationnement.\n\n6. Vous pourrez ensuite appuyer sur l\'emplacement enregistré ou sur la notification pour ouvrir la carte et voir où votre voiture est garée.</string>
 
     <string name="instrucciones">Instructions</string>
-
-    <string name="ubicacion_segundo_plano_titulo">Autoriser l\'accès à la position en arrière-plan</string>
-
-    <string name="ubicacion_segundo_plano_explicacion">Pour enregistrer automatiquement l\'emplacement où vous avez garé votre voiture lorsque vous quittez l\'application ou éteignez l\'écran, Leo\'s BTPark doit accéder à votre position en arrière-plan.</string>
-
-    <string name="ubicacion_segundo_plano_pasos">Sur l\'écran suivant :\n1. Appuyez sur "Autorisations".\n2. Sélectionnez "Position".\n3. Sélectionnez "Toujours autoriser".\n\nEnsuite, revenez à Leo\'s BTPark.</string>
-
+    <string name="ubicacion_segundo_plano_titulo">Hintergrundzugriff auf den Standort erlauben</string>
+    <string name="ubicacion_segundo_plano_explicacion">Damit dein Parkplatz automatisch gespeichert werden kann, wenn du die App verlässt oder den Bildschirm ausschaltest, benötigt Leo\'s BTPark Zugriff auf deinen Standort im Hintergrund. Du kannst erst fortfahren, wenn du der App den Standortzugriff "Immer zulassen" gewährt hast.</string>
+    <string name="ubicacion_segundo_plano_pasos">Auf dem nächsten Bildschirm:\n1. Tippe auf "Berechtigungen".\n2. Wähle "Standort" aus.\n3. Wähle "Immer zulassen" aus.\n\nDieser Bildschirm bleibt geöffnet, bis du die erforderliche Berechtigung erteilt hast. Sobald die Berechtigung korrekt erteilt wurde, kehrt Leo\'s BTPark automatisch zum Hauptbildschirm zurück.</string>
     <string name="abrir_ajustes">Ouvrir les paramètres</string>
     <string name="explain_notification">Vous pouvez choisir si la notification d’état peut être fermée ou si elle doit rester disponible à tout moment. Si vous la fermez, vous pouvez toujours accéder à l’application en l’ouvrant depuis votre appareil. Si vous choisissez de la garder toujours visible, la notification sera automatiquement recréée chaque fois qu’elle est fermée.</string>
     <string name="hacer_la_notificaci_n_persistente">Toujours conserver la notification</string>

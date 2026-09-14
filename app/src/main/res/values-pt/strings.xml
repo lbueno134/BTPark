@@ -56,13 +56,9 @@
     <string name="manual_text">1. Selecione o dispositivo Bluetooth do seu carro.\n\n2. Conceda à aplicação as permissões solicitadas.\n\n3. É muito importante permitir o acesso à localização através da opção "Permitir sempre".\n\n4. Depois de configurada, a aplicação ficará a aguardar que o Bluetooth do seu carro seja desligado.\n\n5. Quando a ligação Bluetooth for perdida, a aplicação guardará a sua localização atual como localização de estacionamento.\n\n6. Depois, pode tocar na localização guardada ou na notificação para abrir o mapa e ver onde o carro está estacionado.</string>
 
     <string name="instrucciones">Instruções</string>
-
     <string name="ubicacion_segundo_plano_titulo">Permitir acesso à localização em segundo plano</string>
-
-    <string name="ubicacion_segundo_plano_explicacion">Para guardar automaticamente a localização onde estacionou quando sair da aplicação ou desligar o ecrã, o Leo\'s BTPark precisa de aceder à sua localização em segundo plano.</string>
-
-    <string name="ubicacion_segundo_plano_pasos">No ecrã seguinte:\n1. Toque em "Permissões".\n2. Selecione "Localização".\n3. Selecione "Permitir sempre".\n\nDepois, volte ao Leo\'s BTPark.</string>
-
+    <string name="ubicacion_segundo_plano_explicacion">Para guardar automaticamente a localização do seu estacionamento quando sair da aplicação ou desligar o ecrã, a Leo\'s BTPark precisa de aceder à sua localização em segundo plano. Não poderá continuar até conceder à aplicação a permissão de localização "Permitir sempre".</string>
+    <string name="ubicacion_segundo_plano_pasos">No ecrã seguinte:\n1. Toque em "Permissões".\n2. Selecione "Localização".\n3. Selecione "Permitir sempre".\n\nEste ecrã permanecerá aberto até conceder a permissão necessária. Quando a permissão tiver sido concedida corretamente, a Leo\'s BTPark voltará automaticamente ao ecrã principal.</string>
     <string name="abrir_ajustes">Abrir definições</string>
     <string name="explain_notification">Pode escolher se a notificação de estado pode ser fechada ou se permanece sempre disponível. Se a fechar, pode continuar a aceder à aplicação abrindo-a no seu dispositivo. Se escolher mantê-la sempre visível, a notificação será recriada automaticamente sempre que for fechada.</string>
     <string name="hacer_la_notificaci_n_persistente">Manter sempre a notificação</string>

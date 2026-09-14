@@ -56,13 +56,9 @@
     <string name="manual_text">1. Seleziona il dispositivo Bluetooth della tua auto.\n\n2. Concedi all\'app le autorizzazioni richieste.\n\n3. È molto importante consentire l\'accesso alla posizione selezionando l\'opzione "Consenti sempre".\n\n4. Una volta configurata, l\'app attenderà che il Bluetooth della tua auto si disconnetta.\n\n5. Quando la connessione Bluetooth viene persa, l\'app salverà la tua posizione attuale come posizione di parcheggio.\n\n6. Potrai quindi toccare la posizione salvata o la notifica per aprire la mappa e vedere dove è parcheggiata l\'auto.</string>
 
     <string name="instrucciones">Istruzioni</string>
-
     <string name="ubicacion_segundo_plano_titulo">Consenti l\'accesso alla posizione in background</string>
-
-    <string name="ubicacion_segundo_plano_explicacion">Per salvare automaticamente la posizione in cui hai parcheggiato quando esci dall\'app o spegni lo schermo, Leo\'s BTPark deve accedere alla tua posizione in background.</string>
-
-    <string name="ubicacion_segundo_plano_pasos">Nella schermata successiva:\n1. Tocca "Autorizzazioni".\n2. Seleziona "Posizione".\n3. Seleziona "Consenti sempre".\n\nQuindi torna a Leo\'s BTPark.</string>
-
+    <string name="ubicacion_segundo_plano_explicacion">Per salvare automaticamente la posizione del parcheggio quando esci dall\'app o spegni lo schermo, Leo\'s BTPark deve accedere alla tua posizione in background. Non potrai continuare finché non avrai concesso all\'app l\'accesso alla posizione "Consenti sempre".</string>
+    <string name="ubicacion_segundo_plano_pasos">Nella schermata successiva:\n1. Tocca "Autorizzazioni".\n2. Seleziona "Posizione".\n3. Seleziona "Consenti sempre".\n\nQuesta schermata rimarrà aperta finché non avrai concesso l\'autorizzazione richiesta. Una volta concessa correttamente l\'autorizzazione, Leo\'s BTPark tornerà automaticamente alla schermata principale.</string>
     <string name="abrir_ajustes">Apri impostazioni</string>
     <string name="explain_notification">Puoi scegliere se la notifica di stato può essere chiusa o se deve rimanere sempre disponibile. Se la chiudi, puoi comunque accedere all\'app aprendola dal tuo dispositivo. Se scegli di mantenerla sempre visibile, la notifica verrà ricreata automaticamente ogni volta che viene chiusa.</string>
     <string name="hacer_la_notificaci_n_persistente">Mantieni sempre la notifica</string>

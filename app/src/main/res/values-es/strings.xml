@@ -56,13 +56,9 @@
     <string name="manual_text">1. Selecciona el dispositivo Bluetooth de tu coche.\n\n2. Concede a la aplicación los permisos solicitados.\n\n3. Es muy importante permitir el acceso a la ubicación seleccionando la opción "Permitir todo el tiempo".\n\n4. Una vez configurada, la aplicación permanecerá esperando a que se desconecte el Bluetooth de tu coche.\n\n5. Cuando se pierda la conexión Bluetooth, la aplicación guardará tu ubicación actual como ubicación de aparcamiento.\n\n6. Después podrás pulsar sobre la ubicación guardada o sobre la notificación para abrir el mapa y ver dónde está aparcado el coche.</string>
 
     <string name="instrucciones">Instrucciones</string>
-
     <string name="ubicacion_segundo_plano_titulo">Permitir acceso a la ubicación en segundo plano</string>
-
-    <string name="ubicacion_segundo_plano_explicacion">Para guardar automáticamente la ubicación donde has aparcado cuando salgas de la aplicación o apagues la pantalla, Leo\'s BTPark necesita acceder a tu ubicación en segundo plano.</string>
-
-    <string name="ubicacion_segundo_plano_pasos">En la siguiente pantalla:\n1. Pulsa "Permisos".\n2. Selecciona "Ubicación".\n3. Selecciona "Permitir todo el tiempo".\n\nDespués, vuelve a Leo\'s BTPark.</string>
-
+    <string name="ubicacion_segundo_plano_explicacion">Para guardar automáticamente tu ubicación de aparcamiento cuando salgas de la aplicación o apagues la pantalla, Leo\'s BTPark necesita acceder a tu ubicación en segundo plano. No podrás continuar hasta que hayas concedido a la aplicación el permiso de ubicación "Permitir siempre".</string>
+    <string name="ubicacion_segundo_plano_pasos">En la siguiente pantalla:\n1. Pulsa "Permisos".\n2. Selecciona "Ubicación".\n3. Selecciona "Permitir siempre".\n\nEsta pantalla permanecerá abierta hasta que concedas el permiso necesario. Cuando el permiso se haya concedido correctamente, Leo\'s BTPark volverá automáticamente a la pantalla principal.</string>
     <string name="abrir_ajustes">Abrir ajustes</string>
     <string name="explain_notification">Puedes elegir si la notificación de estado se puede cerrar o si permanece disponible en todo momento. Si la cierras, puedes seguir accediendo a la aplicación abriéndola desde tu dispositivo. Si eliges mantenerla siempre visible, la notificación se volverá a crear automáticamente cada vez que la cierres.</string>
     <string name="hacer_la_notificaci_n_persistente">Mantener siempre la notificación</string>
